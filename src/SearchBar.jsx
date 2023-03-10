@@ -4,12 +4,22 @@ import TextField from "@mui/material/TextField";
 
 export default function SearchBar() {
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [data, setData] = React.useState(0);
+  const handleEnter = (event) => {
+    if (event.charCode === 13 || event.keyCode == 13) {
+      setData(searchQuery);
+    }
+  };
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
   };
   React.useEffect(() => {
-    console.log(searchQuery);
-  }, [searchQuery]);
+    if (data === 0) {
+      console.log("Data hasn't fetched yet.");
+    } else {
+      console.log(data, "Data fetched from API");
+    }
+  }, [data]);
 
   return (
     <Box
@@ -19,6 +29,7 @@ export default function SearchBar() {
       }}
     >
       <TextField
+        onKeyDown={handleEnter}
         onChange={handleSearch}
         placeholder="search"
         fullWidth
