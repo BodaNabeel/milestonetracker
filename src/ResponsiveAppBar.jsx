@@ -9,8 +9,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchBar from "./SearchBar";
 import { Divider, useMediaQuery } from "@mui/material";
 
-export default function ResponsiveAppBar() {
-  const responsiveSearchBar = useMediaQuery("(min-width:701px)");
+export default function ResponsiveAppBar({
+  searchFieldQuery,
+  setSearchFieldQuery,
+}) {
+  const responsiveSearchBar = useMediaQuery("(min-width:700px)");
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -18,14 +21,19 @@ export default function ResponsiveAppBar() {
         position="static"
         sx={{ display: "flex", justifyContent: "space-between" }}
       >
-        <Toolbar 
-        sx={{
-            justifyContent: "space-between"
-        }}
+        <Toolbar
+          sx={{
+            justifyContent: "space-between",
+          }}
         >
           <p>Tracker Logo</p>
           <Divider orientation="vertical" flexItem />
-          {responsiveSearchBar ? <SearchBar /> : null}
+          {responsiveSearchBar ? (
+            <SearchBar
+              searchFieldQuery={searchFieldQuery}
+              setSearchFieldQuery={setSearchFieldQuery}
+            />
+          ) : null}
           <p>Buy me a coffee</p>
           <p>Logout</p>
         </Toolbar>
