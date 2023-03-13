@@ -1,13 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
-import { display } from "@mui/system";
 export default function SearchBar() {
   const [data, setData] = React.useState(0);
-  const responsiveSearchBar = useMediaQuery("(min-width:1020px)");
   const handleSearch = (event) => {
     if (event.charCode === 13 || event.keyCode == 13) {
       setData(event.target.value);
@@ -33,9 +30,6 @@ export default function SearchBar() {
       }}
     >
       <TextField
-        // sx={{
-        //   width: responsiveSearchBar ? "1000%" : "100%"
-        // }}
         sx={{ margin: "0 10px" }}
         onKeyDown={handleSearch}
         placeholder="search movie/book/game"
