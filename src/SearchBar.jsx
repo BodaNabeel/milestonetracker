@@ -4,6 +4,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
+import { display } from "@mui/system";
 export default function SearchBar() {
   const [data, setData] = React.useState(0);
   const responsiveSearchBar = useMediaQuery("(min-width:1020px)");
@@ -32,6 +33,10 @@ export default function SearchBar() {
       }}
     >
       <TextField
+        // sx={{
+        //   width: responsiveSearchBar ? "1000%" : "100%"
+        // }}
+        sx={{ margin: "0 10px" }}
         onKeyDown={handleSearch}
         placeholder="search movie/book/game"
         fullWidth
@@ -42,9 +47,6 @@ export default function SearchBar() {
               <SearchIcon />
             </InputAdornment>
           ),
-        }}
-        sx={{
-          width: responsiveSearchBar ? "50%" : "80%",
         }}
       />
     </Box>
