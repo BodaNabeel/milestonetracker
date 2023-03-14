@@ -9,6 +9,7 @@ export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
     if (event.charCode === 13 || event.keyCode == 13) {
       setData(event.target.value);
       setSearchFieldQuery("");
+      event.target.blur();
     }
   };
   const manageQuery = (event) => {
@@ -19,7 +20,6 @@ export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
       console.log("Data hasn't fetched yet.");
     } else {
       console.log(data, "Data fetched from API");
-      alert(data);
     }
   }, [data]);
 
@@ -44,7 +44,6 @@ export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
           border: "1px solid #EEEEEE",
           borderRadius: "8px",
           background: "#F8F8F8",
-          // height: "40px"
         }}
         size="small"
         onKeyDown={handleSearch}
