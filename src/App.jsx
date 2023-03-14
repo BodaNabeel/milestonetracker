@@ -9,12 +9,19 @@ function App() {
 
   return (
     <>
-      <ResponsiveAppBar searchFieldQuery={searchFieldQuery} setSearchFieldQuery={setSearchFieldQuery}/>
-      <br />
+      <ResponsiveAppBar
+        searchFieldQuery={searchFieldQuery}
+        setSearchFieldQuery={setSearchFieldQuery}
+      />
+
       {responsiveSearchBar ? (
-        <SearchBar searchFieldQuery={searchFieldQuery} setSearchFieldQuery={setSearchFieldQuery} />
+        <SearchBar
+          searchFieldQuery={searchFieldQuery}
+          setSearchFieldQuery={setSearchFieldQuery}
+        />
       ) : null}
-      <Divider />
+
+      {responsiveSearchBar ? null : <Divider />}
     </>
   );
 }
