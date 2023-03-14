@@ -13,13 +13,20 @@ export default function ResponsiveAppBar({
   searchFieldQuery,
   setSearchFieldQuery,
 }) {
-  const responsiveSearchBar = useMediaQuery("(min-width:700px)");
+  const responsiveSearchBar = useMediaQuery("(min-width:701px)");
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
         position="static"
-        sx={{ display: "flex", justifyContent: "space-between" }}
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          background: "white",
+          color: "black",
+          boxShadow: "none",
+          margin: 0
+        }}
       >
         <Toolbar
           sx={{
