@@ -1,10 +1,14 @@
-import * as React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
-  const [data, setData] = React.useState(0);
+  const [data, setData] = useState(0);
+  const baseURLforShow = `https://api.themoviedb.org/3/search/tv?api_key=30d24f251c62092cc350130a6f881fec&language=en-US&page=1&query=${data}`;
+  const baseURLforMovie = `https://api.themoviedb.org/3/search/movie?api_key=30d24f251c62092cc350130a6f881fec&language=en-US&query=${data}`;
+  const [movieData, setMovieData] = useState(null);
   const handleSearch = (event) => {
     if (event.charCode === 13 || event.keyCode == 13) {
       setData(event.target.value);
@@ -15,12 +19,18 @@ export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
   const manageQuery = (event) => {
     setSearchFieldQuery(event.target.value);
   };
-  React.useEffect(() => {
+  useEffect(() => {
     if (data === 0) {
       console.log("Data hasn't fetched yet.");
     } else {
       console.log(data, "Data fetched from API");
     }
+  }, [data]);
+  useEffect(() => {
+    axios.get(baseURLforMovie).then((response) => {
+      setMovieData(response.data);
+      console.log(movieData);
+    });
   }, [data]);
 
   return (
