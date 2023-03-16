@@ -6,12 +6,14 @@ import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
   const [APIquery, setAPIquery] = useState();
-  const [data, setData] = useState(0);
+  const [data, setData] = useState();
   const baseURLforShow = `https://api.themoviedb.org/3/search/tv?api_key=30d24f251c62092cc350130a6f881fec&language=en-US&page=1&query=${APIquery}`;
   const baseURLforMovie = `https://api.themoviedb.org/3/search/movie?api_key=30d24f251c62092cc350130a6f881fec&language=en-US&query=${APIquery}`;
-  const [movieData, setMovieData] = useState(null);
+  const [movieData, setMovieData] = useState();
+  const [seriesData, setSeriesData] = useState();
+
   const handleSearch = (event) => {
-    if (event.charCode === 13 || event.keyCode == 13) {
+    if (event.key == "Enter") {
       let searchQuery = event.target.value;
       setData(searchQuery);
       setSearchFieldQuery("");
@@ -25,20 +27,24 @@ export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
     setSearchFieldQuery(event.target.value);
   };
   useEffect(() => {
-    if (data !== 0) {
+    if (data) {
       axios.get(baseURLforMovie).then((response) => {
         let APIdata = response.data;
         setMovieData(APIdata);
-        console.log(APIquery);
+      });
+      axios.get(baseURLforShow).then((response) => {
+        let APIdata = response.data;
+        setSeriesData(APIdata);
       });
     }
   }, [data]);
 
   useEffect(() => {
-    if (movieData) {
-      console.log(movieData);
+    if (movieData && seriesData ) {
+      console.log("Movie: ", movieData);
+      console.log("Show", seriesData);
     }
-  }, [movieData]);
+  }, [movieData,seriesData]);
 
   return (
     <Box
