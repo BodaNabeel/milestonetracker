@@ -40,11 +40,15 @@ export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
   }, [data]);
 
   useEffect(() => {
-    if (movieData && seriesData ) {
+    if (movieData) {
       console.log("Movie: ", movieData);
-      console.log("Show", seriesData);
     }
-  }, [movieData,seriesData]);
+  }, [movieData]);
+  useEffect(() => {
+    if (seriesData) {
+      console.log("Show:", seriesData);
+    }
+  }, [seriesData]);
 
   return (
     <Box
