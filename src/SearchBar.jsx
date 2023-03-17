@@ -9,8 +9,10 @@ export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
   const [data, setData] = useState();
   const baseURLforShow = `https://api.themoviedb.org/3/search/tv?api_key=30d24f251c62092cc350130a6f881fec&language=en-US&page=1&query=${APIquery}`;
   const baseURLforMovie = `https://api.themoviedb.org/3/search/movie?api_key=30d24f251c62092cc350130a6f881fec&language=en-US&query=${APIquery}`;
+  const baseURLforBook = `https://www.googleapis.com/books/v1/volumes?q=${APIquery}&key=AIzaSyBAa6_wmFuqCdHBHF-45FsfTOhaFoPjHQA&maxResults=10`;
   const [movieData, setMovieData] = useState();
   const [seriesData, setSeriesData] = useState();
+  const [bookData, setBookData] = useState();
 
   const handleSearch = (event) => {
     if (event.key == "Enter") {
@@ -30,11 +32,15 @@ export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
     if (data) {
       axios.get(baseURLforMovie).then((response) => {
         let APIdata = response.data;
-        setMovieData(APIdata);
+        APIdata.results.length > 0 ? setMovieData(APIdata) : null;
       });
       axios.get(baseURLforShow).then((response) => {
         let APIdata = response.data;
-        setSeriesData(APIdata);
+        APIdata.results.length > 0 ? setSeriesData(APIdata) : null;
+      });
+      axios.get(baseURLforBook).then((response) => {
+        let APIData = response.data;
+        setBookData(APIData);
       });
     }
   }, [data]);
@@ -49,6 +55,11 @@ export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
       console.log("Show:", seriesData);
     }
   }, [seriesData]);
+  useEffect(() => {
+    if (bookData) {
+      console.log("Book", bookData);
+    }
+  }, [bookData]);
 
   return (
     <Box
