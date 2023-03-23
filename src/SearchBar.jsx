@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
-import { DataContext } from "./DataStore";
+import { DataContext } from "./data/DataStore";
 export default function SearchBar({ searchFieldQuery, setSearchFieldQuery }) {
   const { setQuery } = useContext(DataContext);
 

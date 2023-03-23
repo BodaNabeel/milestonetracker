@@ -2,7 +2,7 @@ import { Divider, useMediaQuery } from "@mui/material";
 import ResponsiveAppBar from "./ResponsiveAppBar";
 import SearchBar from "./SearchBar";
 import React, { useContext, useEffect } from "react";
-import { DataContext } from "./DataStore";
+import { DataContext } from "./data/DataStore";
 
 function App() {
   const responsiveSearchBar = useMediaQuery("(max-width:700px)");
@@ -12,8 +12,8 @@ function App() {
   const { movies, books } = useContext(DataContext);
   // console.log(movies);
   useEffect(() => {
-    let length = Object.keys(movies).length
-    length > 0 ? console.log(movies) :  null;
+    let length = Object.keys(movies).length;
+    length > 0 ? console.log(movies) : null;
     // console.log(Object.keys(movies).length)
     // movies.length > 0 ? console.log(movies) : null;
   }, [movies]);

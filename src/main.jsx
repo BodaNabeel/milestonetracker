@@ -1,6 +1,6 @@
 import React from "react";
 import * as ReactDOM from "react-dom/client";
-import { DataProvider } from "./DataStore";
+import { DataProvider } from "./data/DataStore";
 import App from "./App";
 import "./style.css";
 
