@@ -2,7 +2,6 @@ import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 export const DataContext = createContext();
 
-// const [APIdata, setAPIdata] = useState()
 export const DataProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
