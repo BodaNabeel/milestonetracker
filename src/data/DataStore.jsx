@@ -19,15 +19,16 @@ export const DataProvider = ({ children }) => {
         let APIdata = response.data;
         if (APIdata.results.length > 0) {
           updateMovies(APIdata);
-        } else null;
+        } else updateMovies([]);
       });
       axios.get(baseURLforShow).then((response) => {
         let APIdata = response.data;
-        APIdata.results.length > 0 ? updateSeries(APIdata) : null;
+        APIdata.results.length > 0 ? updateSeries(APIdata) : updateSeries([]);
       });
       axios.get(baseURLforBook).then((response) => {
-        let APIData = response.data;
-        updateBooks(APIData);
+        let APIdata = response.data;
+        APIdata.length > 0 ? updateBooks(APIdata) : updateBooks([])
+        updateBooks(APIdata);
       });
     }
   }, [query]);
