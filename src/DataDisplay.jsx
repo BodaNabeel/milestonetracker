@@ -13,17 +13,14 @@ import ScrollableTabsButtonForce from "./Scrollable";
 
 function DataDisplay() {
   const { movies, books, series } = useContext(DataContext);
-  function MoviesRender({ movies }) {
-    // movies.length !== 0 ? console.log(movies) : 0;
-    // console.log(movies)
-  }
-  function SeriesRender({ series }) {
-    // series.length !== 0 ? console.log(series) : 0;
-  }
+
+  function MoviesRender({ movies }) {}
+  function SeriesRender({ series }) {}
   function BooksRender({ books }) {
     if (books.length === 0) {
       return <h1>NO DATA FOUND</h1>;
     } else {
+      console.log(books.items[0].volumeInfo.imageLinks);
       return (
         <>
           <Grid container direction="row" spacing={2} m={4}>
@@ -32,16 +29,22 @@ function DataDisplay() {
                 <Grid item key={index}>
                   <Card
                     sx={{
-                      width: "100%",
+                      // width: "100%",
+                      // maxWidth: "800px",
                       display: "flex",
                       height: "460px",
+                      width: "230px",
                       flexDirection: "column",
                     }}
                   >
                     <CardMedia
                       component="img"
-                      alt={"thumbnail of " + element.volumeInfo.title}
-                      image={element.volumeInfo.imageLinks.smallThumbnail}
+                      alt={"Thumbnail of " + element.volumeInfo.title}
+                      image={
+                        element.volumeInfo.imageLinks === undefined
+                          ? ""
+                          : element.volumeInfo.imageLinks.thumbnail
+                      }
                       sx={{
                         width: "100%",
                         maxWidth: "200px",
@@ -60,7 +63,7 @@ function DataDisplay() {
                     >
                       <Typography
                         gutterBottom
-                        variant="h5"
+                        variant="h6"
                         component="div"
                         sx={{}}
                         className="text-truncate"
@@ -92,24 +95,8 @@ function DataDisplay() {
   return (
     <>
       <ScrollableTabsButtonForce />
-      {/* <div className="book-container">{<BooksRender books={books} />}</div> */}
-      {/* <Grid container direction="row">
-        <Grid item>
-          <BooksRender books={books} />
-        </Grid>
-      </Grid> */}
-      {/* <Grid container direction="row">
-        {books.items.map((element, index) => (
-          <Grid item key={index}>
-            <BooksRender books={books} />
-          </Grid>
-        ))}
-      </Grid> */}
-      <Grid container direction="row">
-        <Grid item>
-          <BooksRender books={books} />
-        </Grid>
-      </Grid>
+
+      <BooksRender books={books} />
       <div className="movie-conatiner">{<MoviesRender movies={movies} />}</div>
       <div className="series-container">{<SeriesRender series={series} />}</div>
     </>
