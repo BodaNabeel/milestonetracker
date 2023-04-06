@@ -27,8 +27,7 @@ export const DataProvider = ({ children }) => {
       });
       axios.get(baseURLforBook).then((response) => {
         let APIdata = response.data;
-        APIdata.length > 0 ? updateBooks(APIdata) : updateBooks([])
-        updateBooks(APIdata);
+        APIdata.items.length > 0 ? updateBooks(APIdata) : updateBooks([]);
       });
     }
   }, [query]);
