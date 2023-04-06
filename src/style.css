@@ -3,3 +3,19 @@ body {
     padding:0;
     font-family: sans-serif;
 }
+.book-container {
+    /* display: flex; */
+    /* flex-direction: column; */
+
+    /* flex-grow: 10; */
+    /* display: flex;
+    margin: 10px; */
+    /* width: 75vw */
+}
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Number of lines to show before truncating */
+    -webkit-box-orient: vertical;
+  }
