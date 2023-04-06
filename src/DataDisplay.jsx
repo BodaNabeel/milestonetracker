@@ -6,6 +6,7 @@ import {
   CardMedia,
   Grid,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import React, { useContext, useEffect } from "react";
 import { DataContext } from "./data/DataStore";
@@ -20,17 +21,25 @@ function DataDisplay() {
     if (books.length === 0) {
       return <h1>NO DATA FOUND</h1>;
     } else {
-      console.log(books.items[0].volumeInfo.imageLinks);
       return (
         <>
-          <Grid container direction="row" spacing={2} m={4}>
+          <Grid
+            container
+            direction="row"
+            spacing={2}
+            my={4}
+            justifyContent="center"
+            sx={{
+              justifyContent: useMediaQuery("(max-width:476px)")
+                ? "center"
+                : "start",
+            }}
+          >
             {books.items.map((element, index) => {
               return (
                 <Grid item key={index}>
                   <Card
                     sx={{
-                      // width: "100%",
-                      // maxWidth: "800px",
                       display: "flex",
                       height: "460px",
                       width: "230px",
