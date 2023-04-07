@@ -1,22 +1,22 @@
 import React, { useContext } from "react";
 import { DataContext } from "../../data/DataContext";
 import {
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    CardMedia,
-    Grid,
-    Typography,
-    useMediaQuery,
-  } from "@mui/material";
-  import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
-  import TurnedInIcon from "@mui/icons-material/TurnedIn";
-function MovieCard() {
-  const { movies } = useContext(DataContext);
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
+import TurnedInIcon from "@mui/icons-material/TurnedIn";
+function SeriesCard() {
+  const { series } = useContext(DataContext);
   const imageUrl = `https://image.tmdb.org/t/p/original`;
-  function MovieRender({ movies }) {
-    if (movies.length == 0) {
+  function SeriesRender({ series }) {
+    if (series.length == 0) {
       return <h1>NO DATA FOUND</h1>;
     } else {
       return (
@@ -34,7 +34,7 @@ function MovieCard() {
               width: "80%",
             }}
           >
-            {movies.results.map((element, index) => {
+            {series.results.map((element, index) => {
               return (
                 <Grid item key={index}>
                   <Card
@@ -48,7 +48,7 @@ function MovieCard() {
                     <CardMedia
                       component="img"
                       alt={"Thumbnail of " + element.original_title}
-                      image={imageUrl+element.backdrop_path}
+                      image={imageUrl + element.backdrop_path}
                       sx={{
                         width: "100%",
                         maxWidth: "200px",
@@ -72,7 +72,7 @@ function MovieCard() {
                         sx={{}}
                         className="text-truncate"
                       >
-                        {element.original_title}
+                        {element.name}
                       </Typography>
                       <Typography
                         variant="body2"
@@ -98,7 +98,7 @@ function MovieCard() {
       );
     }
   }
-  return <MovieRender movies={movies} />;
+  return <SeriesRender series={series} />;
 }
 
-export default MovieCard;
+export default SeriesCard;
