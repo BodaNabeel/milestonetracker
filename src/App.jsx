@@ -1,8 +1,8 @@
 import { Divider, useMediaQuery } from "@mui/material";
 import ResponsiveAppBar from "./component/ResponsiveAppBar";
 import SearchBar from "./component/SearchBar";
-import React, { useContext, useEffect } from "react";
-import { DataContext } from "./data/DataStore";
+import React, { useContext} from "react";
+import { DataContext } from "./data/DataContext";
 import DataDisplay from "./component/DataDisplay";
 
 function App() {

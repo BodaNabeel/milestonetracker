@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { DataContext } from "../../data/DataStore";
+import { DataContext } from "../../data/DataContext";
 import {
   Button,
   Card,
@@ -32,8 +32,8 @@ function BookCard() {
               justifyContent: useMediaQuery("(max-width:476px)")
                 ? "center"
                 : "",
-                margin: "10px auto",
-                width: "80%"
+              margin: "10px auto",
+              width: "80%",
             }}
           >
             {books.items.map((element, index) => {

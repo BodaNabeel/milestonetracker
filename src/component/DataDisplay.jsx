@@ -1,12 +1,14 @@
 import React from "react";
-import Scrollable from "./Scrollable"
+import Scrollable from "./Scrollable";
 
 import BookCard from "./card/BookCard";
+import MovieCard from "./card/MovieCard";
 function DataDisplay() {
   return (
     <>
-    <Scrollable/>
+      <Scrollable />
       <BookCard />
+      <MovieCard />
     </>
   );
 }
