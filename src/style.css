@@ -8,6 +8,13 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
+    -webkit-line-clamp: 1; /* Number of lines to show before truncating */
+    -webkit-box-orient: vertical;
+  }
+  .text-truncate-para {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
     -webkit-line-clamp: 2; /* Number of lines to show before truncating */
     -webkit-box-orient: vertical;
   }

@@ -9,9 +9,10 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React, { useContext, useEffect } from "react";
-import { DataContext } from "./data/DataStore";
+import { DataContext } from "../data/DataStore";
 import ScrollableTabsButtonForce from "./Scrollable";
-
+import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
+import TurnedInIcon from "@mui/icons-material/TurnedIn";
 function DataDisplay() {
   const { movies, books, series } = useContext(DataContext);
 
@@ -82,14 +83,17 @@ function DataDisplay() {
                       <Typography
                         variant="body2"
                         color="text.secondary"
-                        className="text-truncate"
+                        className="text-truncate-para"
                       >
                         {element.volumeInfo.subtitle}
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <Button size="small">Share</Button>
-                      <Button size="small">Learn More</Button>
+                      {/* TODO: Dynamically switching between icons and text */}
+                      <Button size="small">
+                        <TurnedInNotIcon /> Add to list
+                      </Button>
+                      {/* <Button size="small"><TurnedInIcon/> Remove from list</Button> */}
                     </CardActions>
                   </Card>
                 </Grid>
