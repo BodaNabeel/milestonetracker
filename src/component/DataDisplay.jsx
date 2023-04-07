@@ -7,7 +7,7 @@ function DataDisplay() {
   return (
     <>
       <Scrollable />
-      <BookCard />
+      {/* <BookCard /> */}
       <MovieCard />
     </>
   );

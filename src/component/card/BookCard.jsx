@@ -24,9 +24,6 @@ function BookCard() {
             container
             direction="row"
             spacing={2}
-            // my={4}
-            // mx={"auto"}
-            // ml={4}
             justifyContent="center"
             sx={{
               justifyContent: useMediaQuery("(max-width:476px)")
