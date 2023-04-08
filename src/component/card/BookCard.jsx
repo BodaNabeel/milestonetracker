@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { DataContext } from "../../data/DataContext";
 import {
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -10,10 +9,11 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
-import TurnedInIcon from "@mui/icons-material/TurnedIn";
+import BookmarkButton from "../BookmarkButton";
 function BookCard() {
-  const { books } = useContext(DataContext);
+ 
+  const { books, setStoredBooks } = useContext(DataContext);
+  const identifier = books.items
   function BooksRender({ books }) {
     if (books.length === 0) {
       return <h1>NO DATA FOUND</h1>;
@@ -86,11 +86,7 @@ function BookCard() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      {/* TODO: Dynamically switching between icons and text */}
-                      <Button size="small">
-                        <TurnedInNotIcon /> Add to list
-                      </Button>
-                      {/* <Button size="small"><TurnedInIcon/> Remove from list</Button> */}
+                    <BookmarkButton token={index} setData={setStoredBooks} identifier={identifier} />
                     </CardActions>
                   </Card>
                 </Grid>

@@ -1,19 +1,18 @@
 import React, { useContext } from "react";
 import { DataContext } from "../../data/DataContext";
 import {
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    CardMedia,
-    Grid,
-    Typography,
-    useMediaQuery,
-  } from "@mui/material";
-  import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
-  import TurnedInIcon from "@mui/icons-material/TurnedIn";
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import BookmarkButton from "../BookmarkButton";
 function MovieCard() {
-  const { movies } = useContext(DataContext);
+  const { movies, setStoredMovies } = useContext(DataContext);
+  const identifier = movies.results
   const imageUrl = `https://image.tmdb.org/t/p/original`;
   function MovieRender({ movies }) {
     if (movies.length == 0) {
@@ -48,7 +47,7 @@ function MovieCard() {
                     <CardMedia
                       component="img"
                       alt={"Thumbnail of " + element.original_title}
-                      image={imageUrl+element.backdrop_path}
+                      image={imageUrl + element.backdrop_path}
                       sx={{
                         width: "100%",
                         maxWidth: "200px",
@@ -83,11 +82,7 @@ function MovieCard() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      {/* TODO: Dynamically switching between icons and text */}
-                      <Button size="small">
-                        <TurnedInNotIcon /> Add to list
-                      </Button>
-                      {/* <Button size="small"><TurnedInIcon/> Remove from list</Button> */}
+                    <BookmarkButton token={index} setData={setStoredMovies} identifier={identifier}/>
                     </CardActions>
                   </Card>
                 </Grid>

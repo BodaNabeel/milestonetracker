@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { DataContext } from "../../data/DataContext";
 import {
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -10,10 +9,11 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
-import TurnedInIcon from "@mui/icons-material/TurnedIn";
+import BookmarkButton from "../BookmarkButton";
+
 function SeriesCard() {
-  const { series } = useContext(DataContext);
+  const { series, setStoredSeries } = useContext(DataContext);
+  const identifier = series.results
   const imageUrl = `https://image.tmdb.org/t/p/original`;
   function SeriesRender({ series }) {
     if (series.length == 0) {
@@ -83,11 +83,7 @@ function SeriesCard() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      {/* TODO: Dynamically switching between icons and text */}
-                      <Button size="small">
-                        <TurnedInNotIcon /> Add to list
-                      </Button>
-                      {/* <Button size="small"><TurnedInIcon/> Remove from list</Button> */}
+                      <BookmarkButton token={index} setData={setStoredSeries} identifier={identifier} />
                     </CardActions>
                   </Card>
                 </Grid>
