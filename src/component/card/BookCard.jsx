@@ -11,9 +11,8 @@ import {
 } from "@mui/material";
 import BookmarkButton from "../BookmarkButton";
 function BookCard() {
- 
   const { books, setStoredBooks } = useContext(DataContext);
-  const identifier = books.items
+  const identifier = books.items;
   function BooksRender({ books }) {
     if (books.length === 0) {
       return <h1>NO DATA FOUND</h1>;
@@ -86,7 +85,12 @@ function BookCard() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                    <BookmarkButton token={index} setData={setStoredBooks} identifier={identifier} />
+                      <BookmarkButton
+                        token={index}
+                        uniquePara={element.id}
+                        setData={setStoredBooks}
+                        identifier={identifier}
+                      />
                     </CardActions>
                   </Card>
                 </Grid>

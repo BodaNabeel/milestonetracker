@@ -12,7 +12,7 @@ import {
 import BookmarkButton from "../BookmarkButton";
 function MovieCard() {
   const { movies, setStoredMovies } = useContext(DataContext);
-  const identifier = movies.results
+  const identifier = movies.results;
   const imageUrl = `https://image.tmdb.org/t/p/original`;
   function MovieRender({ movies }) {
     if (movies.length == 0) {
@@ -82,7 +82,12 @@ function MovieCard() {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                    <BookmarkButton token={index} setData={setStoredMovies} identifier={identifier}/>
+                      <BookmarkButton
+                        uniquePara={element.id}
+                        token={index}
+                        setData={setStoredMovies}
+                        identifier={identifier}
+                      />
                     </CardActions>
                   </Card>
                 </Grid>
