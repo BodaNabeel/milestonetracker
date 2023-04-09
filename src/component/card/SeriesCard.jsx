@@ -12,7 +12,7 @@ import {
 import BookmarkButton from "../BookmarkButton";
 
 function SeriesCard() {
-  const { series, setStoredSeries } = useContext(DataContext);
+  const { series, setStoredSeries, storedSeries } = useContext(DataContext);
   const identifier = series.results;
   const imageUrl = `https://image.tmdb.org/t/p/original`;
   function SeriesRender({ series }) {
@@ -88,6 +88,7 @@ function SeriesCard() {
                         uniquePara={element.id}
                         setData={setStoredSeries}
                         identifier={identifier}
+                        data={storedSeries}
                       />
                     </CardActions>
                   </Card>

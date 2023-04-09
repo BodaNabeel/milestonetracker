@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import BookmarkButton from "../BookmarkButton";
 function MovieCard() {
-  const { movies, setStoredMovies } = useContext(DataContext);
+  const { movies, setStoredMovies, storedMovies } = useContext(DataContext);
   const identifier = movies.results;
   const imageUrl = `https://image.tmdb.org/t/p/original`;
   function MovieRender({ movies }) {
@@ -87,6 +87,7 @@ function MovieCard() {
                         token={index}
                         setData={setStoredMovies}
                         identifier={identifier}
+                        data={storedMovies}
                       />
                     </CardActions>
                   </Card>

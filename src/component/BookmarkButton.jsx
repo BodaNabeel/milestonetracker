@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import TurnedInNotIcon from "@mui/icons-material/TurnedInNot";
 import TurnedInIcon from "@mui/icons-material/TurnedIn";
 import { DataContext } from "../data/DataContext";
-function BookmarkButton({ token, setData, identifier, uniquePara }) {
+function BookmarkButton({ token, setData, identifier, uniquePara, data }) {
   const { clickedButtonsList, setClickedButtonsList } = useContext(DataContext);
 
   const DynamicRenderingOfButton = function ({ el }) {
@@ -20,14 +20,20 @@ function BookmarkButton({ token, setData, identifier, uniquePara }) {
   const handleClick = function () {
     const index = clickedButtonsList.findIndex((item) => item === uniquePara);
     if (index !== -1) {
-      console.log("copy found in the list");
       const newClickedButtonsList = [...clickedButtonsList];
       newClickedButtonsList.splice(index, 1);
       setClickedButtonsList(newClickedButtonsList);
+
+      data.forEach((element, index) => {
+        if (element.id === uniquePara) {
+          const updatedDataList = [...data];
+          updatedDataList.splice(index, 1);
+          setData(updatedDataList);
+        }
+      });
     } else {
       setData((prevState) => [...prevState, identifier[token]]);
       setClickedButtonsList((prevState) => [...prevState, uniquePara]);
-      setIcon("delete");
     }
   };
   return (
