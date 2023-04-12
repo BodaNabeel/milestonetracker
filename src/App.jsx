@@ -26,8 +26,8 @@ function App() {
       ) : null}
       {responsiveSearchBar ? null : <Divider />}
 
-      {query ? <DataDisplay /> : null}
-      <DoughnutChart/>
+      {query ? <DataDisplay /> : <DoughnutChart/>}
+      
     </>
   );
 }
