@@ -6,7 +6,6 @@ import { DataContext } from "./data/DataContext";
 import DataDisplay from "./component/DataDisplay";
 import DoughnutChart from "./component/DoughnutChart";
 import ProgressOverviewCard from "./component/card/ProgressOverviewCard";
-
 function App() {
   const responsiveSearchBar = useMediaQuery("(max-width:700px)");
   const [searchFieldQuery, setSearchFieldQuery] = React.useState("");
