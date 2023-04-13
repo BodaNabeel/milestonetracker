@@ -20,7 +20,7 @@ export default function ScrollableTabsButtonForce({
         allowScrollButtonsMobile={vw ? true : false}
         centered={vw ? false : true}
         scrollButtons={vw ? true : false}
-        variant={vw ? "scrollable" : ""}
+        variant={vw ? "scrollable" : null}
       >
         <Tab value={0} label="All" />
         <Tab value={1} label="Books" />
