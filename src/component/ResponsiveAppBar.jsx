@@ -12,6 +12,7 @@ import { Divider, useMediaQuery } from "@mui/material";
 export default function ResponsiveAppBar({
   searchFieldQuery,
   setSearchFieldQuery,
+  setIsHome
 }) {
   const responsiveSearchBar = useMediaQuery("(min-width:701px)");
 
@@ -33,7 +34,7 @@ export default function ResponsiveAppBar({
             justifyContent: "space-between",
           }}
         >
-          <p>Tracker Logo</p>
+          <p onClick={() => setIsHome(true)}>Tracker Logo</p>
           <Divider orientation="vertical" flexItem />
           {responsiveSearchBar ? (
             <SearchBar
