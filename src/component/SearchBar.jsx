@@ -4,7 +4,11 @@ import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import { DataContext } from "../data/DataContext";
-export default function SearchBar({ searchFieldQuery, setSearchFieldQuery, setIsHome }) {
+export default function SearchBar({
+  searchFieldQuery,
+  setSearchFieldQuery,
+  setIsHome,
+}) {
   const { setQuery } = useContext(DataContext);
 
   const handleSearch = (event) => {
@@ -14,7 +18,7 @@ export default function SearchBar({ searchFieldQuery, setSearchFieldQuery, setIs
       setQuery(res);
       setSearchFieldQuery("");
       event.target.blur();
-      setIsHome(false)
+      setIsHome(false);
     }
   };
   const manageQuery = (event) => {

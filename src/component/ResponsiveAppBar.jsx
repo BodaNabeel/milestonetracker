@@ -38,6 +38,7 @@ export default function ResponsiveAppBar({
           <Divider orientation="vertical" flexItem />
           {responsiveSearchBar ? (
             <SearchBar
+            setIsHome={setIsHome}
               searchFieldQuery={searchFieldQuery}
               setSearchFieldQuery={setSearchFieldQuery}
             />
