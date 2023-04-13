@@ -11,11 +11,31 @@ export const DataProvider = ({ children }) => {
   const [storedMovies, setStoredMovies] = useState([]);
   const [storedSeries, setStoredSeries] = useState([]);
   const [storedBooks, setStoredBooks] = useState([]);
+  const [completedBooks, setcompletedBooks] = useState(['1', '2']);
+  const [completedMovies, setCompletedMovies] = useState(['1', '2']);
+  const [completedSeries, setCompletedSeries] = useState(['1', '2']);
   const [clickedButtonsList, setClickedButtonsList] = useState([]);
   const baseURLforShow = `https://api.themoviedb.org/3/search/tv?api_key=30d24f251c62092cc350130a6f881fec&language=en-US&page=1&query=${query}`;
   const baseURLforMovie = `https://api.themoviedb.org/3/search/movie?api_key=30d24f251c62092cc350130a6f881fec&language=en-US&query=${query}`;
   const baseURLforBook = `https://www.googleapis.com/books/v1/volumes?q=${query}&key=AIzaSyBAa6_wmFuqCdHBHF-45FsfTOhaFoPjHQA&maxResults=10`;
-
+  const CompletedPendingData = {
+    books: [
+      "Books",
+      completedBooks.length,
+      storedBooks.length - completedBooks.length,
+    ],
+    movies: [
+      "Movies",
+      completedMovies.length,
+      storedMovies.length - completedMovistoredMovies.length,
+    ],
+    books: [
+      "Series",
+      completedSeries.length,
+      storedSeries.length - completedSeries.length,
+    ],
+    // games: ["Games", completedGames.length, storedGames.length - completedGames.length ]
+  };
   useEffect(() => {
     if (query) {
       axios.get(baseURLforMovie).then((response) => {
@@ -74,7 +94,11 @@ export const DataProvider = ({ children }) => {
         storedMovies,
         setStoredMovies,
         clickedButtonsList,
-        setClickedButtonsList
+        setClickedButtonsList,
+        completedBooks,
+        completedMovies,
+        completedSeries,
+        CompletedPendingData,
       }}
     >
       {children}
