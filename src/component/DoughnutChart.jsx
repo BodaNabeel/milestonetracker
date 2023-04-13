@@ -2,12 +2,12 @@ import React, { useEffect, useRef } from "react";
 import { Doughnut } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
-function DoughnutChart() {
+function DoughnutChart({completed, pending}) {
   const data = {
     labels: ["Completed", "Pending"],
     datasets: [
       {
-        data: [4, 20],
+        data: [completed,pending],
         backgroundColor: "rgba(75,192,192,0.2)",
         borderColor: "rgba(75,192,192,1)",
         borderWidth: 1,
