@@ -16,7 +16,7 @@ function DoughnutChart({completed, pending}) {
   };
 
   const options = {
-    cutout: "85%",
+    cutout: "80%",
     plugins: {
       legend: {
         display: false,
