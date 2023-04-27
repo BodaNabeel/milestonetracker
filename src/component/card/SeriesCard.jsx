@@ -25,9 +25,8 @@ function SeriesCard() {
             container
             direction="row"
             spacing={2}
-            justifyContent="center"
             sx={{
-              justifyContent: useMediaQuery("(max-width:476px)")
+              justifyContent: useMediaQuery("(max-width:760px)")
                 ? "center"
                 : "",
               margin: "10px auto",

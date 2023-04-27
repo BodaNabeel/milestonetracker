@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import BookmarkButton from "../BookmarkButton";
 function BookCard() {
-  const { books, storedBooks,setStoredBooks } = useContext(DataContext);
+  const { books, storedBooks, setStoredBooks } = useContext(DataContext);
   const identifier = books.items;
   function BooksRender({ books }) {
     if (books.length === 0) {
@@ -23,9 +23,8 @@ function BookCard() {
             container
             direction="row"
             spacing={2}
-            justifyContent="center"
             sx={{
-              justifyContent: useMediaQuery("(max-width:476px)")
+              justifyContent: useMediaQuery("(max-width:760px)")
                 ? "center"
                 : "",
               margin: "10px auto",
@@ -34,7 +33,11 @@ function BookCard() {
           >
             {books.items.map((element, index) => {
               return (
-                <Grid item key={index}>
+                <Grid item key={index}
+                style={{
+                  
+                }}
+                >
                   <Card
                     sx={{
                       display: "flex",
