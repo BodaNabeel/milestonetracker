@@ -18,3 +18,14 @@ body {
   -webkit-line-clamp: 2; /* Number of lines to show before truncating */
   -webkit-box-orient: vertical;
 }
+.ProgressOverviewCard-title {
+  background-color: red;
+
+  background-image: linear-gradient(to right, #4464a8 60%, #92a2d0 70%);
+  background-size: 100%;
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
