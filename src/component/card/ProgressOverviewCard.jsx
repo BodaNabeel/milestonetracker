@@ -2,16 +2,23 @@ import React, { useContext } from "react";
 import { DataContext } from "../../data/DataContext";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import DoughnutChart from "../DoughnutChart";
+import { useMediaQuery } from "@mui/material";
 export default function ProgressOverviewCard() {
   const { CompletedPendingData } = useContext(DataContext);
   const keys = Object.keys(CompletedPendingData);
+  const responsiveCardContainer = useMediaQuery("(min-width:1000px)");
   return (
     <div
       className="ProgressOverviewCard-Container"
       style={{
         display: "flex",
-        flexDirection: "column",
+        flexDirection: responsiveCardContainer ? "row" : "column",
+        // height: responsiveCardContainer ? "85vh" : "",
         alignItems: "center",
+        justifyContent: "space-around",
+        // margin: "35px 0"
+        marginTop: "40px",
+
       }}
     >
       {keys.map((el) => {
