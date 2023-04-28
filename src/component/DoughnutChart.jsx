@@ -8,8 +8,10 @@ function DoughnutChart({completed, pending}) {
     datasets: [
       {
         data: [completed,pending],
-        backgroundColor: "rgba(75,192,192,0.2)",
-        borderColor: "rgba(75,192,192,1)",
+        backgroundColor: ["#4464A8", "#92A2D0"],
+        hoverBackgroundColor: ["#4464A8", "#92A2D0"],
+        // TODO: use radius property to set it's height and length 
+        // ex: radius: "40%"
         borderWidth: 1,
       },
     ],
