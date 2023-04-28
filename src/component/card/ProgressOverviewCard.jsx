@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { DataContext } from "../../data/DataContext";
+import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import DoughnutChart from "../DoughnutChart";
 export default function ProgressOverviewCard() {
   const { CompletedPendingData } = useContext(DataContext);
@@ -7,15 +8,11 @@ export default function ProgressOverviewCard() {
   return (
     <div
       className="ProgressOverviewCard-Container"
-      style={
-        {
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          
-        
-        }
-      }
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
     >
       {keys.map((el) => {
         return (
@@ -23,30 +20,25 @@ export default function ProgressOverviewCard() {
             key={el}
             className="ProgressOverviewCard"
             style={{
-              border: "1px solid red",
-              height: "450px",
-              width: "360px",
+              height: "480px",
+              width: "70%",
+              maxWidth: "320px",
               margin: "15px 0",
               display: "flex",
               flexDirection: "column",
+              boxShadow: "0px 0px 10px 5px rgba(166,156,166,1)",
+              padding: "10px",
+              justifyContent: "space-evenly",
+              borderRadius: "12px",
             }}
           >
             <h1
               className="ProgressOverviewCard-title"
-              style={{
-                height: "2%",
-              }}
+              //
             >
               {CompletedPendingData[el].title}
             </h1>
-            {/* <div
-              className="ProgressOverviewCard-content"
-              style={
-                {
-                  // height: "mac-co"
-                }
-              }
-            > */}
+
             <DoughnutChart
               completed={CompletedPendingData[el].completed}
               pending={CompletedPendingData[el].pending}
@@ -56,11 +48,25 @@ export default function ProgressOverviewCard() {
               style={{
                 alignSelf: "flex-end",
                 marginRight: "12px",
+                border: "none",
+                background: "transparent",
+                backgroundImage:
+                  "linear-gradient(90deg, #fcecfe, #fbf6e7, #e6fcf5)",
+                cursor: "pointer",
+                borderRadius: "20px",
+                padding: "10px 20px",
+
+                display: "flex",
+                alignItems: "center",
               }}
             >
               Details
+              <ReadMoreIcon
+                sx={{
+                  marginLeft: "15px",
+                }}
+              />
             </button>
-            {/* </div> */}
           </div>
         );
       })}
