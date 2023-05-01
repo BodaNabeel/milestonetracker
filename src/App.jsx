@@ -4,13 +4,13 @@ import SearchBar from "./component/SearchBar";
 import React, { useContext, useState } from "react";
 import { DataContext } from "./data/DataContext";
 import DataDisplay from "./component/DataDisplay";
-import DoughnutChart from "./component/DoughnutChart";
 import ProgressOverviewCard from "./component/card/ProgressOverviewCard";
-function App() {
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+function PrimaryApp() {
   const responsiveSearchBar = useMediaQuery("(max-width:700px)");
   const [searchFieldQuery, setSearchFieldQuery] = React.useState("");
-  const { query } = useContext(DataContext);
-  const [isHome, setIsHome] = useState(true)
+  const [isHome, setIsHome] = useState(true);
 
   return (
     <>
@@ -22,17 +22,24 @@ function App() {
 
       {responsiveSearchBar ? (
         <SearchBar
-        setIsHome={setIsHome}
+          setIsHome={setIsHome}
           searchFieldQuery={searchFieldQuery}
           setSearchFieldQuery={setSearchFieldQuery}
         />
       ) : null}
       {responsiveSearchBar ? null : <Divider />}
-      {isHome ? <ProgressOverviewCard/> : <DataDisplay/>}
-      {/* {query  ? <DataDisplay /> : <ProgressOverviewCard/>} */}
-      
     </>
   );
 }
-
+function App() {
+  return (
+    <BrowserRouter>
+      <PrimaryApp />
+      <Routes>
+        <Route path="/" element={<ProgressOverviewCard />} />
+        <Route path="/:res" element={<DataDisplay />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
 export default App;

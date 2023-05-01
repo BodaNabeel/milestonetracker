@@ -8,14 +8,15 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchBar from "./SearchBar";
 import { Divider, useMediaQuery } from "@mui/material";
+import {useNavigate} from "react-router-dom"
 
 export default function ResponsiveAppBar({
   searchFieldQuery,
   setSearchFieldQuery,
-  setIsHome
+  setIsHome,
 }) {
   const responsiveSearchBar = useMediaQuery("(min-width:701px)");
-
+  const navigate = useNavigate();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -26,7 +27,7 @@ export default function ResponsiveAppBar({
           background: "white",
           color: "black",
           boxShadow: "none",
-          margin: 0
+          margin: 0,
         }}
       >
         <Toolbar
@@ -34,11 +35,11 @@ export default function ResponsiveAppBar({
             justifyContent: "space-between",
           }}
         >
-          <p onClick={() => setIsHome(true)}>Tracker Logo</p>
+          <p onClick={() => navigate("/")}>Tracker Logo</p>
           <Divider orientation="vertical" flexItem />
           {responsiveSearchBar ? (
             <SearchBar
-            setIsHome={setIsHome}
+              setIsHome={setIsHome}
               searchFieldQuery={searchFieldQuery}
               setSearchFieldQuery={setSearchFieldQuery}
             />

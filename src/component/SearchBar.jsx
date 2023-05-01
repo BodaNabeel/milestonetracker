@@ -4,18 +4,20 @@ import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import { DataContext } from "../data/DataContext";
+import {useNavigate} from "react-router-dom"
 export default function SearchBar({
   searchFieldQuery,
   setSearchFieldQuery,
   setIsHome,
 }) {
   const { setQuery } = useContext(DataContext);
-
+  const navigate = useNavigate()
   const handleSearch = (event) => {
     if (event.key == "Enter") {
       let searchQuery = event.target.value;
       let res = searchQuery.replace(/ /, "+");
       setQuery(res);
+      navigate(`/${res}`)
       setSearchFieldQuery("");
       event.target.blur();
       setIsHome(false);
