@@ -3,7 +3,9 @@ import { DataContext } from "../../data/DataContext";
 import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import DoughnutChart from "../DoughnutChart";
 import { useMediaQuery } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 export default function ProgressOverviewCard() {
+  const navigate = useNavigate();
   const { CompletedPendingData } = useContext(DataContext);
   const keys = Object.keys(CompletedPendingData);
   const responsiveCardContainer = useMediaQuery("(min-width:1000px)");
@@ -13,12 +15,9 @@ export default function ProgressOverviewCard() {
       style={{
         display: "flex",
         flexDirection: responsiveCardContainer ? "row" : "column",
-        // height: responsiveCardContainer ? "85vh" : "",
         alignItems: "center",
         justifyContent: "space-around",
-        // margin: "35px 0"
         marginTop: "40px",
-
       }}
     >
       {keys.map((el) => {
@@ -52,6 +51,9 @@ export default function ProgressOverviewCard() {
               total={CompletedPendingData[el].total}
             />
             <button
+              onClick={() =>
+                navigate(`/tracking/${CompletedPendingData[el].title}`)
+              }
               className="ProgressOverviewCard-btn"
               style={{
                 alignSelf: "flex-end",
