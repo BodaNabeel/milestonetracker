@@ -23,16 +23,19 @@ export const DataProvider = ({ children }) => {
       title: "Books",
       completed: completedBooks.length,
       pending: storedBooks.length - completedBooks.length,
+      total: storedBooks.length,
     },
     movies: {
       title: "Movies",
       completed: completedMovies.length,
       pending: storedMovies.length - completedMovies.length,
+      total: storedMovies.length
     },
     series: {
       title: "Series",
       completed: completedSeries.length,
       pending: storedSeries.length - completedSeries.length,
+      total: storedSeries.length
     },
     // games: ["Games", completedGames.length, storedGames.length - completedGames.length ]
   };
