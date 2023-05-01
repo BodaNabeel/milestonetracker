@@ -49,6 +49,7 @@ export default function ProgressOverviewCard() {
             <DoughnutChart
               completed={CompletedPendingData[el].completed}
               pending={CompletedPendingData[el].pending}
+              total={CompletedPendingData[el].total}
             />
             <button
               className="ProgressOverviewCard-btn"
