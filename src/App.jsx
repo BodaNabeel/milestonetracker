@@ -6,6 +6,7 @@ import { DataContext } from "./data/DataContext";
 import DataDisplay from "./component/DataDisplay";
 import ProgressOverviewCard from "./component/card/ProgressOverviewCard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import DetailedTracking from "./component/card/DetailedTracking";
 
 function PrimaryApp() {
   const responsiveSearchBar = useMediaQuery("(max-width:700px)");
@@ -38,7 +39,8 @@ function App() {
       <Routes>
         <Route path="/" element={<ProgressOverviewCard />} />
         <Route path="/:res" element={<DataDisplay />} />
-        <Route path="/tracking/Books" element={<h1>Hello World!</h1>}/>
+        <Route path="/tracking/:id" element={<DetailedTracking/>}/>
+
       </Routes>
     </BrowserRouter>
   );
