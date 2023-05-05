@@ -5,8 +5,10 @@ import { DataContext } from "../../data/DataContext";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { Card, CardContent, CardMedia, Grid, Typography, useMediaQuery } from "@mui/material";
 function DataRender({ data, parameter, list, setList,setData }) {
+  const vwOne = useMediaQuery("(max-width:425px)");
+  const vwTwo = useMediaQuery("(max-width: 290px)")
   const toggleCompletedList = (id, data) => {
     const disposalList = [...list];
     disposalList.push(data[id].id);
@@ -78,10 +80,12 @@ function DataRender({ data, parameter, list, setList,setData }) {
                     }
                     sx={{
                       width: "100%",
-                      maxWidth: "200px",
+                      // maxWidth: "100px",
+                      maxWidth: "180px",
                       height: "150px",
                       objectFit: "fill",
                       alignSelf: "center",
+                      display: vwOne ? "none" : ""
                     }}
                   />
                   <CardContent
