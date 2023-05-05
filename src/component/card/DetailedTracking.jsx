@@ -6,7 +6,7 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
-function DataRender({ data, parameter, list, setList }) {
+function DataRender({ data, parameter, list, setList,setData }) {
   const toggleCompletedList = (id, data) => {
     const disposalList = [...list];
     disposalList.push(data[id].id);
@@ -18,6 +18,13 @@ function DataRender({ data, parameter, list, setList }) {
       disposalList.splice(index, 1);
       setList(disposalList);
     }
+  };
+  const deleteAnItem = (id, data) => {
+    const disposalData = [...data];
+    disposalData.splice(id, 1);
+    setData(disposalData)
+    console.log(data)
+    console.log(disposalData);
   };
   if (data.length === 0) {
     return <h1>NO DATA FOUND</h1>;
@@ -132,7 +139,7 @@ function DataRender({ data, parameter, list, setList }) {
                     )}
                     <DeleteOutlineOutlinedIcon
                       sx={{ cursor: "pointer", marginTop: "15px" }}
-                      onClick={() => console.log(tempData)}
+                      onClick={() => deleteAnItem(index, data)}
                     />
                   </CardContent>
                 </Card>
@@ -150,6 +157,9 @@ function DetailedTracking() {
     storedMovies,
     storedBooks,
     storedSeries,
+    setStoredMovies,
+    setStoredBooks,
+    setStoredSeries,
     completedBooks,
     setCompletedBooks,
     completedMovies,
@@ -164,6 +174,7 @@ function DetailedTracking() {
     return (
       <DataRender
         data={storedBooks}
+        setData={setStoredBooks}
         parameter={routeId}
         list={completedBooks}
         setList={setCompletedBooks}
@@ -173,6 +184,7 @@ function DetailedTracking() {
     return (
       <DataRender
         data={storedSeries}
+        setData={setStoredSeries}
         parameter={routeId}
         list={completedSeries}
         setList={setCompletedSeries}
@@ -182,6 +194,7 @@ function DetailedTracking() {
     return (
       <DataRender
         data={storedMovies}
+        setData={setStoredMovies}
         parameter={routeId}
         list={completedMovies}
         setList={setCompletedMovies}
