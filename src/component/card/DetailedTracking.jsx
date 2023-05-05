@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { DataContext } from "../../data/DataContext";
 import BookCard from "./BookCard";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import {
+  Box,
   Card,
   CardActions,
   CardContent,
@@ -16,19 +20,21 @@ import {
 // TODO: Then look into the error related to sending cookie in a cross-site
 
 function DataRender({ data, parameter }) {
+  const [isChecked, setIsChecked] = useState(true);
   if (data.length === 0) {
     return <h1>NO DATA FOUND</h1>;
   } else {
     return (
       <>
-        <Grid
-          container
-          direction="row"
-          spacing={2}
-          sx={{
-            justifyContent: useMediaQuery("(max-width:760px)") ? "center" : "",
-            margin: "10px auto",
-            width: "80%",
+        <div
+          style={{
+            padding: "12px 0",
+            width: "100%",
+
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           {data.map((element, index) => {
@@ -37,9 +43,14 @@ function DataRender({ data, parameter }) {
                 <Card
                   sx={{
                     display: "flex",
-                    height: "460px",
-                    width: "230px",
-                    flexDirection: "column",
+                    flexDirection: "row",
+                    margin: "12px 0",
+                    backgroundColor: isChecked ? "#f8f8f8" : "",
+                    width: "90vw",
+                    maxWidth: "850px",
+                    border: "none",
+                    boxShadow: "none",
+                    justifyContent: "space-between",
                   }}
                 >
                   <CardMedia
@@ -63,7 +74,7 @@ function DataRender({ data, parameter }) {
                     sx={{
                       width: "100%",
                       maxWidth: "200px",
-                      height: "300px",
+                      height: "150px",
                       objectFit: "fill",
                       alignSelf: "center",
                     }}
@@ -103,11 +114,27 @@ function DataRender({ data, parameter }) {
                         : ""}
                     </Typography>
                   </CardContent>
+                  <CardContent
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignSelf: "center",
+                    }}
+                  >
+                    {isChecked ? (
+                      <CheckBoxIcon sx={{ cursor: "pointer" }} />
+                    ) : (
+                      <CheckBoxOutlineBlankIcon sx={{ cursor: "pointer" }} />
+                    )}
+                    <DeleteOutlineOutlinedIcon
+                      sx={{ cursor: "pointer", marginTop: "15px" }}
+                    />
+                  </CardContent>
                 </Card>
               </Grid>
             );
           })}
-        </Grid>
+        </div>
       </>
     );
   }
