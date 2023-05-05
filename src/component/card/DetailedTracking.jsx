@@ -2,41 +2,23 @@ import React, { useRef, useState } from "react";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { DataContext } from "../../data/DataContext";
-import BookCard from "./BookCard";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import {
-  Box,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Grid,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
-// TODO: Build the structure for this compoenent which renders for all movies, books, series along all functionalitites like mark as completed, incompleted, remove from the list
-// TODO: Then look into the error related to sending cookie in a cross-site
-
+import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
 function DataRender({ data, parameter, list, setList }) {
-  const [tempData, setTempData] = useState([]);
-  const [first, setFirst] = useState()
+  const toggleCompletedList = (id, data) => {
+    const disposalList = [...list];
+    disposalList.push(data[id].id);
+    setList(disposalList);
 
-  const test = (e,d,i) => {
-    // console.log(e)
-    // console.log(d)
-    // console.log(i)
-    // console.log(d[i])
-    setTempData(d[i].id);
-    // console.log(tempData)
-  }
-  const toggleCompletedList = () => {
-
-  }
-  const { markedCompleted, setMarkedCompleted } = useContext(DataContext);
-  const ref = useRef()
-  const [isChecked, setIsChecked] = useState(false);
+    if (list.includes(data[id].id)) {
+      const index = list.indexOf(data[id].id);
+      const disposalList = [...list];
+      disposalList.splice(index, 1);
+      setList(disposalList);
+    }
+  };
   if (data.length === 0) {
     return <h1>NO DATA FOUND</h1>;
   } else {
@@ -57,12 +39,11 @@ function DataRender({ data, parameter, list, setList }) {
             return (
               <Grid item key={index} style={{}}>
                 <Card
-                ref={ref}
                   sx={{
                     display: "flex",
                     flexDirection: "row",
                     margin: "12px 0",
-                    backgroundColor: isChecked ? "#f8f8f8" : "",
+                    backgroundColor: list.includes(element.id) ? "#f8f8f8" : "",
                     width: "90vw",
                     maxWidth: "850px",
                     border: "none",
@@ -138,20 +119,20 @@ function DataRender({ data, parameter, list, setList }) {
                       alignSelf: "center",
                     }}
                   >
-                    {isChecked ? (
+                    {list.includes(element.id) ? (
                       <CheckBoxIcon
-                        onClick={() => setIsChecked(false)}
+                        onClick={() => toggleCompletedList(index, data)}
                         sx={{ cursor: "pointer" }}
                       />
                     ) : (
                       <CheckBoxOutlineBlankIcon
-                        onClick={() => test(ref.current,data,index)}
+                        onClick={() => toggleCompletedList(index, data)}
                         sx={{ cursor: "pointer" }}
                       />
                     )}
                     <DeleteOutlineOutlinedIcon
                       sx={{ cursor: "pointer", marginTop: "15px" }}
-                      onClick={()=> console.log(tempData)}
+                      onClick={() => console.log(tempData)}
                     />
                   </CardContent>
                 </Card>
@@ -165,16 +146,47 @@ function DataRender({ data, parameter, list, setList }) {
 }
 
 function DetailedTracking() {
-  const { storedMovies, storedBooks, storedSeries } = useContext(DataContext);
+  const {
+    storedMovies,
+    storedBooks,
+    storedSeries,
+    completedBooks,
+    setCompletedBooks,
+    completedMovies,
+    setCompletedMovies,
+    completedSeries,
+    setCompletedSeries,
+  } = useContext(DataContext);
   const routeParams = useParams();
   const routeId = routeParams.id;
 
   if (routeId === "Books") {
-    return <DataRender data={storedBooks} parameter={routeId} list={completedBooks} setList={setCompletedBooks} />;
+    return (
+      <DataRender
+        data={storedBooks}
+        parameter={routeId}
+        list={completedBooks}
+        setList={setCompletedBooks}
+      />
+    );
   } else if (routeId === "Series") {
-    return <DataRender data={storedSeries} parameter={routeId} list={completedSeries} setList={setCompletedSeries}/>;
+    return (
+      <DataRender
+        data={storedSeries}
+        parameter={routeId}
+        list={completedSeries}
+        setList={setCompletedSeries}
+      />
+    );
   } else if (routeId === "Movies") {
-    return <DataRender data={storedMovies} parameter={routeId} list={completedMovies} setList={setCompletedMovies} />;
+    return (
+      <DataRender
+        data={storedMovies}
+        parameter={routeId}
+        list={completedMovies}
+        setList={setCompletedMovies}
+      />
+    );
   }
 }
 
