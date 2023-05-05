@@ -22,7 +22,7 @@ export default function ScrollableTabsButtonForce({
         scrollButtons={vw ? true : false}
         variant={vw ? "scrollable" : null}
       >
-        <Tab value={0} label="All" />
+        {/* <Tab value={0} label="All" /> */}
         <Tab value={1} label="Books" />
         <Tab value={2} label="Movies" />
         <Tab value={3} label="Series" />
