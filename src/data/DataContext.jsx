@@ -490,9 +490,9 @@ export const DataProvider = ({ children }) => {
       },
     },
   ]);
-  const [completedBooks, setCompletedBooks] = useState(["1", "2"]);
-  const [completedMovies, setCompletedMovies] = useState(["1", "2"]);
-  const [completedSeries, setCompletedSeries] = useState(["1", "2"]);
+  const [completedBooks, setCompletedBooks] = useState([]);
+  const [completedMovies, setCompletedMovies] = useState([]);
+  const [completedSeries, setCompletedSeries] = useState([]);
   const [clickedButtonsList, setClickedButtonsList] = useState([]);
   const baseURLforShow = `https://api.themoviedb.org/3/search/tv?api_key=30d24f251c62092cc350130a6f881fec&language=en-US&page=1&query=${query}`;
   const baseURLforMovie = `https://api.themoviedb.org/3/search/movie?api_key=30d24f251c62092cc350130a6f881fec&language=en-US&query=${query}`;
