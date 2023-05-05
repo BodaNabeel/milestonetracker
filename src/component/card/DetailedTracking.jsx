@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import { DataContext } from "../../data/DataContext";
@@ -19,8 +19,24 @@ import {
 // TODO: Build the structure for this compoenent which renders for all movies, books, series along all functionalitites like mark as completed, incompleted, remove from the list
 // TODO: Then look into the error related to sending cookie in a cross-site
 
-function DataRender({ data, parameter }) {
-  const [isChecked, setIsChecked] = useState(true);
+function DataRender({ data, parameter, list, setList }) {
+  const [tempData, setTempData] = useState([]);
+  const [first, setFirst] = useState()
+
+  const test = (e,d,i) => {
+    // console.log(e)
+    // console.log(d)
+    // console.log(i)
+    // console.log(d[i])
+    setTempData(d[i].id);
+    // console.log(tempData)
+  }
+  const toggleCompletedList = () => {
+
+  }
+  const { markedCompleted, setMarkedCompleted } = useContext(DataContext);
+  const ref = useRef()
+  const [isChecked, setIsChecked] = useState(false);
   if (data.length === 0) {
     return <h1>NO DATA FOUND</h1>;
   } else {
@@ -41,6 +57,7 @@ function DataRender({ data, parameter }) {
             return (
               <Grid item key={index} style={{}}>
                 <Card
+                ref={ref}
                   sx={{
                     display: "flex",
                     flexDirection: "row",
@@ -122,12 +139,19 @@ function DataRender({ data, parameter }) {
                     }}
                   >
                     {isChecked ? (
-                      <CheckBoxIcon sx={{ cursor: "pointer" }} />
+                      <CheckBoxIcon
+                        onClick={() => setIsChecked(false)}
+                        sx={{ cursor: "pointer" }}
+                      />
                     ) : (
-                      <CheckBoxOutlineBlankIcon sx={{ cursor: "pointer" }} />
+                      <CheckBoxOutlineBlankIcon
+                        onClick={() => test(ref.current,data,index)}
+                        sx={{ cursor: "pointer" }}
+                      />
                     )}
                     <DeleteOutlineOutlinedIcon
                       sx={{ cursor: "pointer", marginTop: "15px" }}
+                      onClick={()=> console.log(tempData)}
                     />
                   </CardContent>
                 </Card>
@@ -146,11 +170,11 @@ function DetailedTracking() {
   const routeId = routeParams.id;
 
   if (routeId === "Books") {
-    return <DataRender data={storedBooks} parameter={routeId} />;
+    return <DataRender data={storedBooks} parameter={routeId} list={completedBooks} setList={setCompletedBooks} />;
   } else if (routeId === "Series") {
-    return <DataRender data={storedSeries} parameter={routeId} />;
+    return <DataRender data={storedSeries} parameter={routeId} list={completedSeries} setList={setCompletedSeries}/>;
   } else if (routeId === "Movies") {
-    return <DataRender data={storedMovies} parameter={routeId} />;
+    return <DataRender data={storedMovies} parameter={routeId} list={completedMovies} setList={setCompletedMovies} />;
   }
 }
 
