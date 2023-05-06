@@ -12,6 +12,7 @@ import {
 import BookmarkButton from "../BookmarkButton";
 function BookCard() {
   const { books, storedBooks, setStoredBooks } = useContext(DataContext);
+  const vw = useMediaQuery("(max-width:760px)")
   const identifier = books.items;
     if (books.length === 0) {
       return <h1>NO DATA FOUND</h1>;
@@ -23,7 +24,7 @@ function BookCard() {
             direction="row"
             spacing={2}
             sx={{
-              justifyContent: useMediaQuery("(max-width:760px)")
+              justifyContent: vw
                 ? "center"
                 : "",
               margin: "10px auto",
