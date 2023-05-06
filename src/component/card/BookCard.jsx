@@ -13,7 +13,6 @@ import BookmarkButton from "../BookmarkButton";
 function BookCard() {
   const { books, storedBooks, setStoredBooks } = useContext(DataContext);
   const identifier = books.items;
-  function BooksRender({ books }) {
     if (books.length === 0) {
       return <h1>NO DATA FOUND</h1>;
     } else {
@@ -104,9 +103,7 @@ function BookCard() {
         </>
       );
     }
-  }
 
-  return <BooksRender books={books} />;
 }
 
 export default BookCard;
