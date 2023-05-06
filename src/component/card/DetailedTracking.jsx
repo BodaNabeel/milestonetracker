@@ -25,8 +25,6 @@ function DataRender({ data, parameter, list, setList,setData }) {
     const disposalData = [...data];
     disposalData.splice(id, 1);
     setData(disposalData)
-    console.log(data)
-    console.log(disposalData);
   };
   if (data.length === 0) {
     return <h1>NO DATA FOUND</h1>;
