@@ -11,17 +11,22 @@ import {
 } from "@mui/material";
 import BookmarkButton from "../BookmarkButton";
 import { ScaleLoader } from "react-spinners";
+import notFoundImg from "../../image/not-found.svg"
 function MovieCard() {
   const { movies, setStoredMovies, storedMovies, error } =
     useContext(DataContext);
   const identifier = movies.results;
   const imageUrl = `https://image.tmdb.org/t/p/original`;
   if (error) {
-    return <h1>Error: {error.message}</h1>;
+    return (
+      <div className="msg-container">
+        <h1>Error: {error.message}</h1>;
+      </div>
+    );
   }
   if (movies.length === 0) {
     return (
-      <div className="loader-container">
+      <div className="msg-container">
         <ScaleLoader
           className="loader-animation"
           color="#92A2D0"
@@ -31,7 +36,16 @@ function MovieCard() {
       </div>
     );
   } else if (!movies) {
-    return <h1>No data found</h1>;
+    return (
+      <div className="msg-container">
+        <img
+          src={notFoundImg}
+          alt="illustration of msg not found"
+          className="msg-container__img"
+        />
+        <h1 className="msg-container__title">no data found</h1>
+      </div>
+    );
   } else if (movies.results.length > 0) {
     return (
       <>

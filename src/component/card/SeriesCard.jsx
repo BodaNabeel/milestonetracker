@@ -11,18 +11,20 @@ import {
 } from "@mui/material";
 import BookmarkButton from "../BookmarkButton";
 import { ScaleLoader } from "react-spinners";
-
+import notFoundImg from "../../image/not-found.svg"
 function SeriesCard() {
   const { series, setStoredSeries, storedSeries, error } =
     useContext(DataContext);
   const identifier = series.results;
   const imageUrl = `https://image.tmdb.org/t/p/original`;
   if (error) {
-    return <h1>Error: {error.message}</h1>;
+    return <div className="msg-container">
+      <h1>Error: {error.message}</h1>;
+    </div>
   }
   if (series.length === 0) {
     return (
-      <div className="loader-container">
+      <div className="msg-container">
         <ScaleLoader
           className="loader-animation"
           color="#92A2D0"
@@ -32,7 +34,12 @@ function SeriesCard() {
       </div>
     );
   } else if (!series) {
-    return <h1> No data found</h1>;
+     return (
+      <div className="msg-container">
+        <img src={notFoundImg} alt="illustration of msg not found" className="msg-container__img" />
+        <h1 className="msg-container__title">no data found</h1>
+      </div>
+    )
   } else if (series.results.length > 0) {
     return (
       <>
