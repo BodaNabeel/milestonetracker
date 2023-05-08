@@ -10,7 +10,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import BookmarkButton from "../BookmarkButton";
-import { TimeSeriesScale } from "chart.js";
+import { ScaleLoader } from "react-spinners";
 
 function SeriesCard() {
   const { series, setStoredSeries, storedSeries, error } =
@@ -21,12 +21,16 @@ function SeriesCard() {
     return <h1>Error: {error.message}</h1>;
   }
   if (series.length === 0) {
-    <ScaleLoader
-      className="loader-animation"
-      color="#92A2D0"
-      height={50}
-      radius={20}
-    />;
+    return (
+      <div className="loader-container">
+        <ScaleLoader
+          className="loader-animation"
+          color="#92A2D0"
+          height={50}
+          radius={20}
+        />
+      </div>
+    );
   } else if (!series) {
     return <h1> No data found</h1>;
   } else if (series.results.length > 0) {

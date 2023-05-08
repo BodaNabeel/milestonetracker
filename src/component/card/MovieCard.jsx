@@ -21,12 +21,14 @@ function MovieCard() {
   }
   if (movies.length === 0) {
     return (
-      <ScaleLoader
-        className="loader-animation"
-        color="#92A2D0"
-        height={50}
-        radius={20}
-      />
+      <div className="loader-container">
+        <ScaleLoader
+          className="loader-animation"
+          color="#92A2D0"
+          height={50}
+          radius={20}
+        />
+      </div>
     );
   } else if (!movies) {
     return <h1>No data found</h1>;

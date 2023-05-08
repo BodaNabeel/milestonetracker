@@ -10,6 +10,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import BookmarkButton from "../BookmarkButton";
+import { ScaleLoader } from "react-spinners";
 function BookCard() {
   const { books, storedBooks, setStoredBooks, error } = useContext(DataContext);
   const vw = useMediaQuery("(max-width:760px)");
@@ -18,12 +19,16 @@ function BookCard() {
     return <h1>Error: {error.message}</h1>;
   }
   if (books?.length === 0) {
-    <ScaleLoader
-      className="loader-animation"
-      color="#92A2D0"
-      height={50}
-      radius={20}
-    />;
+    return (
+      <div className="loader-container">
+        <ScaleLoader
+          className="loader-animation"
+          color="#92A2D0"
+          height={50}
+          radius={20}
+        />
+      </div>
+    );
   } else if (!books) {
     return <h1>No data found</h1>;
   } else if (books?.items) {
