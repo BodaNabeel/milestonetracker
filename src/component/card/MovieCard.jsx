@@ -10,13 +10,27 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import BookmarkButton from "../BookmarkButton";
+import { ScaleLoader } from "react-spinners";
 function MovieCard() {
-  const { movies, setStoredMovies, storedMovies } = useContext(DataContext);
+  const { movies, setStoredMovies, storedMovies, error } =
+    useContext(DataContext);
   const identifier = movies.results;
   const imageUrl = `https://image.tmdb.org/t/p/original`;
-  if (movies.length == 0) {
-    return <h1>NO DATA FOUND</h1>;
-  } else {
+  if (error) {
+    return <h1>Error: {error.message}</h1>;
+  }
+  if (movies.length === 0) {
+    return (
+      <ScaleLoader
+        className="loader-animation"
+        color="#92A2D0"
+        height={50}
+        radius={20}
+      />
+    );
+  } else if (!movies) {
+    return <h1>No data found</h1>;
+  } else if (movies.results.length > 0) {
     return (
       <>
         <Grid
