@@ -80,38 +80,6 @@ export const DataProvider = ({ children }) => {
       fetchSeries();
     }
   }, [query]);
-  
-  // useEffect(() => {
-  //   if (query) {
-  //     setBooks([]);
-  //     setMovies([]);
-  //     setSeries([]);
-  //     axios
-  //       .get(baseURLforBook)
-  //       .then((response) => {
-  //         const data = response.data;
-  //         data.totalItems > 0 ? setBooks(data) : setBooks(false);
-  //       })
-  //       .catch((err) => {
-  //         setError(err);
-  //       });
-  //     axios
-  //       .get(baseURLforMovie)
-  //       .then((response) => {
-  //         const data = response.data;
-  //         // console.log(data)
-  //         data.total_results > 0 ? setMovies(data) : setMovies(false);
-  //       })
-  //       .catch((err) => {
-  //         setError(err);
-  //       });
-  //     axios.get(baseURLforShow).then((response) => {
-  //       const data = response.data;
-  //       console.log(data);
-  //       data.total_results > 0 ? setSeries(data) : setSeries(false);
-  //     });
-  //   }
-  // }, [query]);
 
   const updateMovies = (newMovies) => {
     setMovies(newMovies);
