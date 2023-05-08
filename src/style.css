@@ -29,10 +29,15 @@ body {
   -moz-background-clip: text;
   -moz-text-fill-color: transparent;
 }
-.loader-container {
+.msg-container {
   height: 85vh;
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+.msg-container__img {
+  width: 100%;
+  max-width: 250px;
 }
