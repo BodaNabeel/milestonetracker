@@ -4,26 +4,31 @@ import Chart from "chart.js/auto";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 function DoughnutChart({ completed, pending, total }) {
- const completionPercentage = Math.round((completed/total)*100)
-  const plugins = [{
-    beforeDraw: function(chart) {
-     var width = chart.width,
-         height = chart.height,
-         ctx = chart.ctx;
-         ctx.restore();
+  const completionPercentage = Math.round((completed / total) * 100);
+  const percentage = isNaN(completionPercentage)
+    ? "no record added"
+    : `${completionPercentage}%`;
+  const plugins = [
+    {
+      beforeDraw: function (chart) {
+        var width = chart.width,
+          height = chart.height,
+          ctx = chart.ctx;
+        ctx.restore();
         //  var fontSize = (height / 160).toFixed(2);
         var fontSize = 2;
-         ctx.font = fontSize + "em sans-serif";
-         ctx.textBaseline = "top";
+        ctx.font = fontSize + "em sans-serif";
+        ctx.textBaseline = "top";
         //  var text = `(${completed}(${completed+pending}))*100`,
         // var text = completed/(completed+pending)*100,
-        var text = `${completionPercentage}%`,
-         textX = Math.round((width - ctx.measureText(text).width) / 2),
-         textY = height / 2;
-         ctx.fillText(text, textX, textY);
-         ctx.save();
-    } 
-  }]
+        var text = percentage,
+          textX = Math.round((width - ctx.measureText(text).width) / 2),
+          textY = height / 2;
+        ctx.fillText(text, textX, textY);
+        ctx.save();
+      },
+    },
+  ];
 
   Chart.register(ChartDataLabels);
   const data = {
