@@ -6,7 +6,7 @@ import { DataContext } from "./data/DataContext";
 import DataDisplay from "./component/DataDisplay";
 import ProgressOverviewCard from "./component/card/ProgressOverviewCard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import DetailedTracking from "./component/card/DetailedTracking";
+import DetailedTracking from "./component/DetailedTracking";
 
 function PrimaryApp() {
   const responsiveSearchBar = useMediaQuery("(max-width:700px)");

@@ -1,11 +1,12 @@
 import React, { useRef, useState } from "react";
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { DataContext } from "../../data/DataContext";
+import { DataContext } from "../data/DataContext";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { Card, CardContent, CardMedia, Grid, Typography, useMediaQuery } from "@mui/material";
+import notFoundImg from "../image/not-found.svg"
 function DataRender({ data, parameter, list, setList,setData }) {
   const vwOne = useMediaQuery("(max-width:425px)");
   const vwTwo = useMediaQuery("(max-width: 290px)")
@@ -27,7 +28,12 @@ function DataRender({ data, parameter, list, setList,setData }) {
     setData(disposalData)
   };
   if (data.length === 0) {
-    return <h1>NO DATA FOUND</h1>;
+    return (
+      <div className="msg-container">
+        <img src={notFoundImg} alt="illustration of msg not found" className="msg-container__img" />
+        <h1 className="msg-container__title">no data found</h1>
+      </div>
+    )
   } else {
     return (
       <>
