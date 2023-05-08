@@ -18,7 +18,7 @@ function BookCard() {
   const identifier = books.items;
   if (error) {
     return <div className="msg-container">
-      <h1>Error: {error.message}</h1>;
+      <h1>Error: {error.message}</h1>
     </div>
   }
   if (books?.length === 0) {

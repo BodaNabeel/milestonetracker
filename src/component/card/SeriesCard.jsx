@@ -19,7 +19,7 @@ function SeriesCard() {
   const imageUrl = `https://image.tmdb.org/t/p/original`;
   if (error) {
     return <div className="msg-container">
-      <h1>Error: {error.message}</h1>;
+      <h1>Error: {error.message}</h1>
     </div>
   }
   if (series.length === 0) {
@@ -66,7 +66,7 @@ function SeriesCard() {
                 >
                   <CardMedia
                     component="img"
-                    alt={"Thumbnail of " + element.original_title}
+                    alt={"Thumbnail of " + element.name}
                     image={imageUrl + element.backdrop_path}
                     sx={{
                       width: "100%",
