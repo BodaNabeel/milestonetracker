@@ -28,10 +28,9 @@ const readUserContent = (updateBook,updateMovie,updateSeries) => {
     const ref = sRef(db, "users/nabeel/data");
     onValue(ref, (snapshot) => {
         const data = snapshot.val();
-        const bookArr = data.book
-        data.book !== undefined ? updateBook(data.book) : updateBook([]);
-        data.movie !== undefined ? updateMovie(data.movie): updateMovie([]);
-        data.series !== undefined ? updateSeries(data.series) : updateSeries([])
+        data?.book !== undefined ? updateBook(data.book) : updateBook([]);
+        data?.movie !== undefined ? updateMovie(data.movie): updateMovie([]);
+        data?.series !== undefined ? updateSeries(data.series) : updateSeries([])
       
     })
 }
