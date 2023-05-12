@@ -13,7 +13,7 @@ import BookmarkButton from "../BookmarkButton";
 import { ScaleLoader } from "react-spinners";
 import notFoundImg from "../../image/not-found.svg"
 function MovieCard() {
-  const { movies, setStoredMovies, storedMovies, error } =
+  const { movies, storedMovies, setStoredMovies,  error } =
     useContext(DataContext);
   const identifier = movies.results;
   const imageUrl = `https://image.tmdb.org/t/p/original`;
