@@ -39,8 +39,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ProgressOverviewCard />} />
         <Route path="/:res" element={<DataDisplay />} />
-        <Route path="/tracking/:id" element={<DetailedTracking/>}/>
-
+        <Route path="/tracking/:id" element={<DetailedTracking />} />
       </Routes>
     </BrowserRouter>
   );
