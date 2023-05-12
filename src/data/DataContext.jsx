@@ -1,7 +1,8 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { writeUserContent } from "../config/firebase";
+import { readUserContent, writeUserContent } from "../config/firebase";
 export const DataContext = createContext();
+
 
 export const DataProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
@@ -41,6 +42,16 @@ export const DataProvider = ({ children }) => {
     },
   };
 
+  const firebaseConfig = {
+    apiKey: "AIzaSyBBy-cdmqc3JHtMlapo5ix-0M4MR8TfjfM",
+    authDomain: "fir-demo-ad505.firebaseapp.com",
+    projectId: "fir-demo-ad505",
+    storageBucket: "fir-demo-ad505.appspot.com",
+    messagingSenderId: "1057114301618",
+    appId: "1:1057114301618:web:d29c8a203d91e8edf355ab",
+    measurementId: "G-54XX7DRMSP",
+  };
+ 
   useEffect(() => {
     async function fetchBooks() {
       try {
@@ -117,6 +128,11 @@ export const DataProvider = ({ children }) => {
       console.log("added");
     }
   }, [storedBooks, storedMovies, storedSeries]);
+  useEffect(() => {
+    readUserContent(setStoredBooks, setStoredMovies, setStoredSeries);
+  }, [])
+  
+ 
 
   return (
     <DataContext.Provider
