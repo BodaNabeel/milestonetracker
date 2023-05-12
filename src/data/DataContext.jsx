@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { writeUserContent } from "../config/firebase";
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
@@ -50,7 +51,7 @@ export const DataProvider = ({ children }) => {
         setError(err);
       }
     }
-  
+
     async function fetchMovies() {
       try {
         const response = await axios.get(baseURLforMovie);
@@ -60,7 +61,7 @@ export const DataProvider = ({ children }) => {
         setError(err);
       }
     }
-  
+
     async function fetchSeries() {
       try {
         const response = await axios.get(baseURLforShow);
@@ -70,7 +71,7 @@ export const DataProvider = ({ children }) => {
         setError(err);
       }
     }
-  
+
     if (query) {
       setBooks([]);
       setMovies([]);
@@ -99,6 +100,23 @@ export const DataProvider = ({ children }) => {
   const updateQuery = (newQuery) => {
     setQuery(newQuery);
   };
+
+  // useEffect(() => {
+  //   if(books.length !== 0)
+  //   writeUserContent(books)
+  //   }
+  // }, [third])
+
+  useEffect(() => {
+    if (
+      storedBooks.length !== 0 ||
+      storedMovies.length !== 0 ||
+      storedSeries.length !== 0
+    ) {
+      writeUserContent(storedBooks, storedMovies, storedSeries);
+      console.log("added");
+    }
+  }, [storedBooks, storedMovies, storedSeries]);
 
   return (
     <DataContext.Provider
