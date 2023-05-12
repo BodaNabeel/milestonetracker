@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { update, ref as sRef, getDatabase, set } from "firebase/database";
+import { update, ref as sRef, getDatabase, set, onValue } from "firebase/database";
 // import { DataContext } from "../data/DataContext";
 // import { useContext, useEffect } from "react";
 
@@ -17,10 +17,23 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 const db = getDatabase();
-export const writeUserContent = (BookEl,MovieEl,SeriesEl) => {
-  set(sRef(db, "users/nabeel"), {
+const writeUserContent = (BookEl,MovieEl,SeriesEl) => {
+  set(sRef(db, "users/nabeel/data"), {
     book: BookEl,
     movie: MovieEl,
     series: SeriesEl
   });
 };
+const readUserContent = (updateBook,updateMovie,updateSeries) => {
+    const ref = sRef(db, "users/nabeel/data");
+    onValue(ref, (snapshot) => {
+        const data = snapshot.val();
+        const bookArr = data.book
+        data.book !== undefined ? updateBook(data.book) : updateBook([]);
+        data.movie !== undefined ? updateMovie(data.movie): updateMovie([]);
+        data.series !== undefined ? updateSeries(data.series) : updateSeries([])
+      
+    })
+}
+
+export {writeUserContent,readUserContent}
