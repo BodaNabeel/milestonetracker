@@ -5,11 +5,18 @@ import { DataContext } from "../data/DataContext";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { Card, CardContent, CardMedia, Grid, Typography, useMediaQuery } from "@mui/material";
-import notFoundImg from "../image/not-found.svg"
-function DataRender({ data, parameter, list, setList,setData }) {
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
+import notFoundImg from "../image/not-found.svg";
+function DataRender({ data, parameter, list, setList, setData }) {
   const vwOne = useMediaQuery("(max-width:425px)");
-  const vwTwo = useMediaQuery("(max-width: 290px)")
+  const vwTwo = useMediaQuery("(max-width: 290px)");
   const toggleCompletedList = (id, data) => {
     const disposalList = [...list];
     disposalList.push(data[id].id);
@@ -25,15 +32,19 @@ function DataRender({ data, parameter, list, setList,setData }) {
   const deleteAnItem = (id, data) => {
     const disposalData = [...data];
     disposalData.splice(id, 1);
-    setData(disposalData)
+    setData(disposalData);
   };
   if (data.length === 0) {
     return (
       <div className="msg-container">
-        <img src={notFoundImg} alt="illustration of msg not found" className="msg-container__img" />
+        <img
+          src={notFoundImg}
+          alt="illustration of msg not found"
+          className="msg-container__img"
+        />
         <h1 className="msg-container__title">no data found</h1>
       </div>
-    )
+    );
   } else {
     return (
       <>
@@ -89,7 +100,7 @@ function DataRender({ data, parameter, list, setList,setData }) {
                       height: "150px",
                       objectFit: "fill",
                       alignSelf: "center",
-                      display: vwOne ? "none" : ""
+                      display: vwOne ? "none" : "",
                     }}
                   />
                   <CardContent
