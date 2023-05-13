@@ -7,14 +7,7 @@ function DataDisplay() {
   const [labelNumber, setLabelNumber] = useState(1);
   const ConditionalRenderingOfData = function () {
     switch (labelNumber) {
-      // case 0:
-      //   return (
-      //     <>
-      //       <BookCard />
-      //       <MovieCard />
-      //       <SeriesCard />
-      //     </>
-      //   );
+     
       case 1:
         return <BookCard />;
       case 2:
