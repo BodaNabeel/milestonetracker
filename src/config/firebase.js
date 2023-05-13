@@ -1,6 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
-import { update, ref as sRef, getDatabase, set, onValue } from "firebase/database";
+import {
+  update,
+  ref as sRef,
+  getDatabase,
+  set,
+  onValue,
+} from "firebase/database";
 // import { DataContext } from "../data/DataContext";
 // import { useContext, useEffect } from "react";
 
@@ -17,22 +23,47 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 const db = getDatabase();
-const writeUserContent = (BookEl,MovieEl,SeriesEl) => {
+const writeUserContent = (
+  BookEl,
+  MovieEl,
+  SeriesEl,
+  completedBooks,
+  completedMovies,
+  completedSeries
+) => {
   set(sRef(db, "users/nabeel/data"), {
     book: BookEl,
     movie: MovieEl,
-    series: SeriesEl
+    series: SeriesEl,
+    completed_books: completedBooks,
+    completed_movies: completedMovies,
+    completed_series: completedSeries,
   });
 };
-const readUserContent = (updateBook,updateMovie,updateSeries) => {
-    const ref = sRef(db, "users/nabeel/data");
-    onValue(ref, (snapshot) => {
-        const data = snapshot.val();
-        data?.book !== undefined ? updateBook(data.book) : updateBook([]);
-        data?.movie !== undefined ? updateMovie(data.movie): updateMovie([]);
-        data?.series !== undefined ? updateSeries(data.series) : updateSeries([])
-      
-    })
-}
+const readUserContent = (
+  updateBook,
+  updateMovie,
+  updateSeries,
+  updateCompletedBooks,
+  updateCompletedMovies,
+  updateCompletedSeries
+) => {
+  const ref = sRef(db, "users/nabeel/data");
+  onValue(ref, (snapshot) => {
+    const data = snapshot.val();
+    data?.book !== undefined ? updateBook(data.book) : updateBook([]);
+    data?.movie !== undefined ? updateMovie(data.movie) : updateMovie([]);
+    data?.series !== undefined ? updateSeries(data.series) : updateSeries([]);
+    data?.completed_books !== undefined
+      ? updateCompletedBooks(data.completed_books)
+      : updateCompletedBooks([]);
+    data?.completed_movies !== undefined
+      ? updateCompletedMovies(data.completed_movies)
+      : updateCompletedMovies([]);
+    data?.completed_series !== undefined
+      ? updateCompletedSeries(data.completed_series)
+      : updateCompletedSeries([]);
+  });
+};
 
-export {writeUserContent,readUserContent}
+export { writeUserContent, readUserContent };
