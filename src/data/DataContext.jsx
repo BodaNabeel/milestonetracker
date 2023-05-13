@@ -3,7 +3,6 @@ import axios from "axios";
 import { readUserContent, writeUserContent } from "../config/firebase";
 export const DataContext = createContext();
 
-
 export const DataProvider = ({ children }) => {
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
@@ -51,7 +50,7 @@ export const DataProvider = ({ children }) => {
     appId: "1:1057114301618:web:d29c8a203d91e8edf355ab",
     measurementId: "G-54XX7DRMSP",
   };
- 
+
   useEffect(() => {
     async function fetchBooks() {
       try {
@@ -112,12 +111,6 @@ export const DataProvider = ({ children }) => {
     setQuery(newQuery);
   };
 
-  // useEffect(() => {
-  //   if(books.length !== 0)
-  //   writeUserContent(books)
-  //   }
-  // }, [third])
-
   useEffect(() => {
     if (
       storedBooks.length !== 0 ||
@@ -125,14 +118,11 @@ export const DataProvider = ({ children }) => {
       storedSeries.length !== 0
     ) {
       writeUserContent(storedBooks, storedMovies, storedSeries);
-      console.log("added");
     }
   }, [storedBooks, storedMovies, storedSeries]);
   useEffect(() => {
     readUserContent(setStoredBooks, setStoredMovies, setStoredSeries);
-  }, [])
-  
- 
+  }, []);
 
   return (
     <DataContext.Provider
