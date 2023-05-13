@@ -9,6 +9,7 @@ export default function ProgressOverviewCard() {
   const { CompletedPendingData } = useContext(DataContext);
   const keys = Object.keys(CompletedPendingData);
   const responsiveCardContainer = useMediaQuery("(min-width:1000px)");
+
   return (
     <div
       className="ProgressOverviewCard-Container"
@@ -21,6 +22,15 @@ export default function ProgressOverviewCard() {
       }}
     >
       {keys.map((el) => {
+        const completionPercentage = Math.round(
+          (CompletedPendingData[el].completed /
+            CompletedPendingData[el].total) *
+            100
+        );
+        const percentage = isNaN(completionPercentage)
+          ? "no record added..."
+          : `${completionPercentage}%`;
+
         return (
           <div
             key={el}
@@ -38,18 +48,36 @@ export default function ProgressOverviewCard() {
               borderRadius: "12px",
             }}
           >
-            <h1
-              className="ProgressOverviewCard-title"
-              //
-            >
+            <h1 className="ProgressOverviewCard-title">
               {CompletedPendingData[el].title}
             </h1>
 
-            <DoughnutChart
-              completed={CompletedPendingData[el].completed}
-              pending={CompletedPendingData[el].pending}
-              total={CompletedPendingData[el].total}
-            />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "relative",
+                padding: 0,
+                margin: 0,
+              }}
+            >
+              <DoughnutChart
+                completed={CompletedPendingData[el].completed}
+                pending={CompletedPendingData[el].pending}
+                total={CompletedPendingData[el].total}
+              />
+              <h5
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  transform: "translateY(-150%)",
+                  fontSize: "1.5rem"
+                }}
+              >
+                {percentage}
+              </h5>
+            </div>
             <button
               onClick={() =>
                 navigate(`/tracking/${CompletedPendingData[el].title}`)
