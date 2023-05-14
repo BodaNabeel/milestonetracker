@@ -167,3 +167,11 @@ export const DataProvider = ({ children }) => {
     </DataContext.Provider>
   );
 };
+
+
+// TODO:
+// fix the delete functionality
+// use googleauth function and test that for the built functionality
+// make sure to change the rules inthe firebase rwaltime database
+// finally create a main landing page
+// go and ship it
