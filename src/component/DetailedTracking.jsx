@@ -30,6 +30,12 @@ function DataRender({ data, parameter, list, setList, setData }) {
     }
   };
   const deleteAnItem = (id, data) => {
+    console.log(data[id].id)
+    const disposalList = [...list];
+    const index = disposalList.indexOf(data[id].id)
+    disposalList.splice(index,1)
+    setList(disposalList)
+    // console.log(list)
     const disposalData = [...data];
     disposalData.splice(id, 1);
     setData(disposalData);
