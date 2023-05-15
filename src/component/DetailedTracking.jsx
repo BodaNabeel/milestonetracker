@@ -19,25 +19,33 @@ function DataRender({ data, parameter, list, setList, setData }) {
   const vwTwo = useMediaQuery("(max-width: 290px)");
   const toggleCompletedList = (id, data) => {
     const disposalList = [...list];
+    console.log(disposalList);
     disposalList.push(data[id].id);
     setList(disposalList);
 
     if (list.includes(data[id].id)) {
       const index = list.indexOf(data[id].id);
       const disposalList = [...list];
+      console.log(disposalList);
       disposalList.splice(index, 1);
       setList(disposalList);
     }
   };
   const deleteAnItem = (id, data) => {
-    console.log(data[id].id)
-    const disposalList = [...list];
-    const index = disposalList.indexOf(data[id].id)
-    disposalList.splice(index,1)
-    setList(disposalList)
-    // console.log(list)
+    let arr = [];
+    console.log(data[id].id);
+    const clickedItem = data[id].id;
+    data.map((el) => {
+      arr.push(el.id);
+    });
+    const disposalList = [...arr];
+
+    disposalList.splice(clickedItem, 1);
+
     const disposalData = [...data];
+
     disposalData.splice(id, 1);
+
     setData(disposalData);
   };
   if (data.length === 0) {
