@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import notFoundImg from "../image/not-found.svg";
 function DataRender({ data, parameter, list, setList, setData }) {
+  const {clickedButtonsList, setClickedButtonsList} =useContext(DataContext)
   const vwOne = useMediaQuery("(max-width:425px)");
   const vwTwo = useMediaQuery("(max-width: 290px)");
   const toggleCompletedList = (id, data) => {
@@ -46,7 +47,12 @@ function DataRender({ data, parameter, list, setList, setData }) {
 
     disposalData.splice(id, 1);
 
+    const disposalClickedButtonsList = [...clickedButtonsList]
+    disposalClickedButtonsList.splice(clickedItem,1)
+    // console.log(clickedButtonsList)
+    // console.log(disposalClickedButtonsList)
     setData(disposalData);
+    setClickedButtonsList(disposalClickedButtonsList)
   };
   if (data.length === 0) {
     return (
