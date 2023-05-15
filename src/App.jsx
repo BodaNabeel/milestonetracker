@@ -7,6 +7,7 @@ import DataDisplay from "./component/DataDisplay";
 import ProgressOverviewCard from "./component/card/ProgressOverviewCard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DetailedTracking from "./component/DetailedTracking";
+import LogInFunction from "./component/LogInFunction";
 
 function PrimaryApp() {
   const responsiveSearchBar = useMediaQuery("(max-width:700px)");
@@ -15,6 +16,7 @@ function PrimaryApp() {
 
   return (
     <>
+
       <ResponsiveAppBar
         setIsHome={setIsHome}
         searchFieldQuery={searchFieldQuery}
@@ -32,10 +34,12 @@ function PrimaryApp() {
     </>
   );
 }
+
 function App() {
   return (
     <BrowserRouter>
       <PrimaryApp />
+      <LogInFunction/>
       <Routes>
         <Route path="/" element={<ProgressOverviewCard />} />
         <Route path="/:res" element={<DataDisplay />} />
