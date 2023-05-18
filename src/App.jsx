@@ -7,8 +7,6 @@ import DataDisplay from "./component/DataDisplay";
 import ProgressOverviewCard from "./component/card/ProgressOverviewCard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DetailedTracking from "./component/DetailedTracking";
-import LogInFunction from "./component/LogInFunction";
-import LoginPage from "./component/LoginPage";
 import Homepage from "./component/Homepage";
 
 function PrimaryApp() {
@@ -37,30 +35,23 @@ function PrimaryApp() {
 }
 
 function App() {
-  const [hasUserLoggedin, setHasUserLoggedin] = useState(false)
-  const {userAuthenticationId} = useContext(DataContext)
-  // console.log(userAuthenticationId)
+  const [hasUserLoggedin, setHasUserLoggedin] = useState(false);
+  const { userAuthenticationId } = useContext(DataContext);
   useEffect(() => {
-    // userAuthenticationId ? setHasUserLoggedin(true) : setHasUserLoggedin(false)
     async function init() {
-      const data = await localStorage.getItem("userIdentification")
-      console.log(data)
+      const data = await localStorage.getItem("userIdentification");
+      console.log(data);
     }
-  init()
-    
-  }, [userAuthenticationId])
+    init();
+  }, [userAuthenticationId]);
 
-  console.log(hasUserLoggedin,userAuthenticationId)
-
-  
-  // console.log( userAuthenticationId ===null)
+  console.log(hasUserLoggedin, userAuthenticationId);
   return (
     <BrowserRouter>
-      {userAuthenticationId? (
+      {userAuthenticationId ? (
         <>
           <PrimaryApp />
           <Routes>
-            <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<ProgressOverviewCard />} />
             <Route path="/:res" element={<DataDisplay />} />
             <Route path="/tracking/:id" element={<DetailedTracking />} />
