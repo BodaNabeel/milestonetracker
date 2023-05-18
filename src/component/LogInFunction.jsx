@@ -3,15 +3,16 @@ import {
   GoogleAuthProvider,
   browserLocalPersistence,
   getAuth,
+  getRedirectResult,
   setPersistence,
   signInWithRedirect,
 } from "firebase/auth";
-import { getDatabase, ref as sRef, set, update } from "firebase/database";
+import { getDatabase, ref as sRef, update } from "firebase/database";
 import { DataContext } from "../data/DataContext";
-export default function LogInFunction() {
-  const userLoggedIn = localStorage.getItem("userIdentification");
-  const { setUserId, setUser, user } = useContext(DataContext);
 
+export default function LogInFunction() {
+  const { setUserId, setUser, user } = useContext(DataContext);
+  const [userSigned, setUserSigned] = useState(false);
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
   const db = getDatabase();
@@ -26,33 +27,43 @@ export default function LogInFunction() {
   };
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user_) => {
-      const localstorageUserId = localStorage.getItem("userIdentification");
+    const handleRedirectResult = () => {
+      getRedirectResult(auth)
+        .then((result) => {
+          const user = result.user;
+          const localstorageUserId = localStorage.getItem("userIdentification");
+          setUserSigned(true);
+          if (user && user.uid !== localstorageUserId) {
+            localStorage.setItem("userIdentification", user.uid);
+            writeUserData(user.displayName, user.email, user.uid);
+            console.log(user.uid, localstorageUserId);
+          }
+        })
+        .catch((error) => {
+          // Handle any error that occurred during redirect result retrieval
+          console.error(error);
+        });
+    };
 
-      if (user_.uid !== localstorageUserId) {
-        console.log(user_);
-        setUser(user_);
-        setUserId(user_.uid);
-        localStorage.setItem("userIdentification", user_.uid);
-        writeUserData(user_.displayName, user_.email, user_.uid);
-      }
-    });
-    return unsubscribe;
-  }, []);
+    handleRedirectResult();
+  }, [userSigned]);
 
   const handleSignIn = () => {
     signInWithRedirect(auth, provider);
   };
+
   const handleSignOut = () => {
     auth.signOut();
     localStorage.removeItem("userIdentification");
+    setUserSigned(false);
   };
+
   return (
     <>
-      {userLoggedIn ? (
-        <button onClick={handleSignOut}>sign out</button>
+      {userSigned ? (
+        <button onClick={handleSignOut}>Sign Out</button>
       ) : (
-        <button onClick={handleSignIn}>sign in</button>
+        <button onClick={handleSignIn}>Sign In</button>
       )}
     </>
   );
