@@ -3,6 +3,7 @@ import axios from "axios";
 import {
   readUserContent,
   writeBookEl,
+  writeClickedButtonsList,
   writeCompletedBooks,
   writeCompletedMovies,
   writeCompletedSeries,
@@ -119,7 +120,8 @@ export const DataProvider = ({ children }) => {
       setCompletedBooks,
       setCompletedMovies,
       setCompletedSeries,
-      setLoaded
+      setLoaded,
+      setClickedButtonsList
     );
   }, []);
 
@@ -132,6 +134,7 @@ export const DataProvider = ({ children }) => {
     writeCompletedBooks(userIdFromLocalStorage, completedBooks, loaded);
     writeCompletedMovies(userIdFromLocalStorage, completedMovies, loaded);
     writeCompletedSeries(userIdFromLocalStorage, completedSeries, loaded);
+    writeClickedButtonsList(userIdFromLocalStorage, clickedButtonsList, loaded)
   }, [
     storedBooks,
     storedMovies,

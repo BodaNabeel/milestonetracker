@@ -70,7 +70,14 @@ const writeCompletedSeries = (userId, completedSeries, loaded) => {
     });
   }
 };
-
+const writeClickedButtonsList = (userId, clickedButtonsList, loaded) => {
+  if (loaded) {
+    update(sRef(db, `users/${userId}/data`), {
+      clicked_buttons_list:
+        clickedButtonsList.length !== 0 ? clickedButtonsList : null,
+    });
+  }
+};
 const readUserContent = (
   updateBook,
   updateMovie,
@@ -78,13 +85,13 @@ const readUserContent = (
   updateCompletedBooks,
   updateCompletedMovies,
   updateCompletedSeries,
-  setLoaded
+  setLoaded,
+  updateClickedButtonsList
 ) => {
   const userID = localStorage.getItem("userIdentification");
   console.log("mounted");
   get(child(dbRef, `users/${userID}/data`)).then((snapshot) => {
     if (snapshot.exists()) {
-      console.log(snapshot.val());
       const data = snapshot.val();
       data.book !== undefined ? updateBook(data.book) : updateBook([]);
       data.movie !== undefined ? updateMovie(data.movie) : updateMovie([]);
@@ -98,7 +105,9 @@ const readUserContent = (
       data.completed_series !== undefined
         ? updateCompletedSeries(data.completed_series)
         : updateCompletedSeries([]);
-      console.log("mounted");
+      data.clicked_buttons_list !== undefined
+        ? updateClickedButtonsList(data.clicked_buttons_list)
+        : updateClickedButtonsList([]);
     }
     setLoaded(true);
   });
@@ -112,4 +121,5 @@ export {
   writeCompletedMovies,
   writeCompletedSeries,
   readUserContent,
+  writeClickedButtonsList,
 };
