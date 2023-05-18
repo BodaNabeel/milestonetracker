@@ -1,9 +1,19 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { readUserContent, writeUserContent } from "../config/firebase";
+import {
+  readUserContent,
+  writeBookEl,
+  writeCompletedBooks,
+  writeCompletedMovies,
+  writeCompletedSeries,
+  writeMovieEl,
+  writeSeriesEl,
+} from "../config/firebase";
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
+  const [loaded, setLoaded] = useState(false);
+
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
   const [books, setBooks] = useState([]);
@@ -102,34 +112,34 @@ export const DataProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (
-      storedBooks.length !== 0 ||
-      storedMovies.length !== 0 ||
-      storedSeries.length !== 0 ||
-      completedBooks.length !== 0 ||
-      completedMovies.length !== 0 ||
-      completedSeries.length !== 0
-    ) {
-      writeUserContent(
-        storedBooks,
-        storedMovies,
-        storedSeries,
-        completedBooks,
-        completedMovies,
-        completedSeries
-      );
-    }
-  }, [storedBooks, storedMovies, storedSeries,completedBooks,completedMovies,completedSeries]);
-  useEffect(() => {
     readUserContent(
       setStoredBooks,
       setStoredMovies,
       setStoredSeries,
       setCompletedBooks,
       setCompletedMovies,
-      setCompletedSeries
+      setCompletedSeries,
+      setLoaded
     );
   }, []);
+
+  useEffect(() => {
+    const userIdFromLocalStorage = localStorage.getItem("userIdentification");
+
+    writeBookEl(userIdFromLocalStorage, storedBooks, loaded);
+    writeMovieEl(userIdFromLocalStorage, storedMovies, loaded);
+    writeSeriesEl(userIdFromLocalStorage, storedSeries, loaded);
+    writeCompletedBooks(userIdFromLocalStorage, completedBooks, loaded);
+    writeCompletedMovies(userIdFromLocalStorage, completedMovies, loaded);
+    writeCompletedSeries(userIdFromLocalStorage, completedSeries, loaded);
+  }, [
+    storedBooks,
+    storedMovies,
+    storedSeries,
+    completedBooks,
+    completedMovies,
+    completedSeries,
+  ]);
 
   return (
     <DataContext.Provider
@@ -167,7 +177,6 @@ export const DataProvider = ({ children }) => {
     </DataContext.Provider>
   );
 };
-
 
 // TODO:
 // fix the delete functionality
