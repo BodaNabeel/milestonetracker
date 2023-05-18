@@ -11,7 +11,14 @@ function LogoutFunction() {
     setUserAuthenticationId(null)
   };
   
-  return <button onClick={handleSignOut}>Logout</button>;
+  return <button 
+  style={{
+    border: "none",
+    backgroundColor: "transparent",
+    fontSize: "16px",
+    cursor: "pointer"
+  }}
+  onClick={handleSignOut}>Logout</button>;
 }
 
 export default LogoutFunction;
