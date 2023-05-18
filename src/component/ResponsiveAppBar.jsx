@@ -37,7 +37,7 @@ export default function ResponsiveAppBar({
             justifyContent: "space-between",
           }}
         >
-          <p onClick={() => navigate("/")}>Tracker Logo</p>
+          <p onClick={() => navigate("/")}>Home</p>
           <Divider orientation="vertical" flexItem />
           {responsiveSearchBar ? (
             <SearchBar
@@ -46,7 +46,11 @@ export default function ResponsiveAppBar({
               setSearchFieldQuery={setSearchFieldQuery}
             />
           ) : null}
-          <p>Buy me a coffee</p>
+          <p
+          style={{
+            cursor: "wait"
+          }}
+          >Buy me a coffee</p>
           <LogoutFunction/>
         </Toolbar>
       </AppBar>
