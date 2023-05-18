@@ -1,13 +1,15 @@
 import { Divider, useMediaQuery } from "@mui/material";
 import ResponsiveAppBar from "./component/ResponsiveAppBar";
 import SearchBar from "./component/SearchBar";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DataContext } from "./data/DataContext";
 import DataDisplay from "./component/DataDisplay";
 import ProgressOverviewCard from "./component/card/ProgressOverviewCard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DetailedTracking from "./component/DetailedTracking";
 import LogInFunction from "./component/LogInFunction";
+import LoginPage from "./component/LoginPage";
+import Homepage from "./component/Homepage";
 
 function PrimaryApp() {
   const responsiveSearchBar = useMediaQuery("(max-width:700px)");
@@ -16,7 +18,6 @@ function PrimaryApp() {
 
   return (
     <>
-
       <ResponsiveAppBar
         setIsHome={setIsHome}
         searchFieldQuery={searchFieldQuery}
@@ -36,15 +37,38 @@ function PrimaryApp() {
 }
 
 function App() {
+  const [hasUserLoggedin, setHasUserLoggedin] = useState(false)
+  const {userAuthenticationId} = useContext(DataContext)
+  // console.log(userAuthenticationId)
+  useEffect(() => {
+    // userAuthenticationId ? setHasUserLoggedin(true) : setHasUserLoggedin(false)
+    async function init() {
+      const data = await localStorage.getItem("userIdentification")
+      console.log(data)
+    }
+  init()
+    
+  }, [userAuthenticationId])
+
+  console.log(hasUserLoggedin,userAuthenticationId)
+
+  
+  // console.log( userAuthenticationId ===null)
   return (
     <BrowserRouter>
-      <PrimaryApp />
-      <LogInFunction/>
-      <Routes>
-        <Route path="/" element={<ProgressOverviewCard />} />
-        <Route path="/:res" element={<DataDisplay />} />
-        <Route path="/tracking/:id" element={<DetailedTracking />} />
-      </Routes>
+      {userAuthenticationId? (
+        <>
+          <PrimaryApp />
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/" element={<ProgressOverviewCard />} />
+            <Route path="/:res" element={<DataDisplay />} />
+            <Route path="/tracking/:id" element={<DetailedTracking />} />
+          </Routes>
+        </>
+      ) : (
+        <Homepage />
+      )}
     </BrowserRouter>
   );
 }

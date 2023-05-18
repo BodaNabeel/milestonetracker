@@ -11,7 +11,7 @@ import { getDatabase, ref as sRef, update } from "firebase/database";
 import { DataContext } from "../data/DataContext";
 
 export default function LogInFunction() {
-  const { setUserId, setUser, user } = useContext(DataContext);
+  const { userAuthenticationId, setUserAuthenticationId } = useContext(DataContext);
   const [userSigned, setUserSigned] = useState(false);
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
@@ -35,8 +35,9 @@ export default function LogInFunction() {
           setUserSigned(true);
           if (user && user.uid !== localstorageUserId) {
             localStorage.setItem("userIdentification", user.uid);
+            setUserAuthenticationId(localStorage.getItem("userIdentification") || null)
             writeUserData(user.displayName, user.email, user.uid);
-            console.log(user.uid, localstorageUserId);
+            console.log(user.uid, userAuthenticationId);
           }
         })
         .catch((error) => {
@@ -46,7 +47,7 @@ export default function LogInFunction() {
     };
 
     handleRedirectResult();
-  }, [userSigned]);
+  }, [userSigned ]);
 
   const handleSignIn = () => {
     signInWithRedirect(auth, provider);
@@ -60,11 +61,13 @@ export default function LogInFunction() {
 
   return (
     <>
-      {userSigned ? (
+        <button onClick={handleSignIn}>Sign In</button>
+
+      {/* {userSigned ? (
         <button onClick={handleSignOut}>Sign Out</button>
       ) : (
         <button onClick={handleSignIn}>Sign In</button>
-      )}
+      )} */}
     </>
   );
 }

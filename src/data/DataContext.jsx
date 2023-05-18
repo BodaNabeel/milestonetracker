@@ -13,14 +13,19 @@ import {
 export const DataContext = createContext();
 
 export const DataProvider = ({ children }) => {
-  const [loaded, setLoaded] = useState(false);
-
+ 
+  const [userAuthenticationId, setUserAuthenticationId] = useState(
+    localStorage.getItem("userIdentification")
+  );
   const [movies, setMovies] = useState([]);
   const [series, setSeries] = useState([]);
   const [books, setBooks] = useState([]);
   const [games, setGames] = useState([]);
   const [query, setQuery] = useState();
   const [error, setError] = useState();
+  const [loaded, setLoaded] = useState(false);
+  // const [fucku, setfucku] = useState()
+  const [setUniqueLoader, setSetUniqueLoader] = useState()
   const [storedMovies, setStoredMovies] = useState([]);
   const [storedSeries, setStoredSeries] = useState([]);
   const [storedBooks, setStoredBooks] = useState([]);
@@ -121,20 +126,19 @@ export const DataProvider = ({ children }) => {
       setCompletedMovies,
       setCompletedSeries,
       setLoaded,
-      setClickedButtonsList
+      setClickedButtonsList,
+      userAuthenticationId
     );
-  }, []);
+  }, [userAuthenticationId]);
 
   useEffect(() => {
-    const userIdFromLocalStorage = localStorage.getItem("userIdentification");
-
-    writeBookEl(userIdFromLocalStorage, storedBooks, loaded);
-    writeMovieEl(userIdFromLocalStorage, storedMovies, loaded);
-    writeSeriesEl(userIdFromLocalStorage, storedSeries, loaded);
-    writeCompletedBooks(userIdFromLocalStorage, completedBooks, loaded);
-    writeCompletedMovies(userIdFromLocalStorage, completedMovies, loaded);
-    writeCompletedSeries(userIdFromLocalStorage, completedSeries, loaded);
-    writeClickedButtonsList(userIdFromLocalStorage, clickedButtonsList, loaded)
+    writeBookEl(userAuthenticationId, storedBooks, loaded);
+    writeMovieEl(userAuthenticationId, storedMovies, loaded);
+    writeSeriesEl(userAuthenticationId, storedSeries, loaded);
+    writeCompletedBooks(userAuthenticationId, completedBooks, loaded);
+    writeCompletedMovies(userAuthenticationId, completedMovies, loaded);
+    writeCompletedSeries(userAuthenticationId, completedSeries, loaded);
+    writeClickedButtonsList(userAuthenticationId, clickedButtonsList, loaded);
   }, [
     storedBooks,
     storedMovies,
@@ -142,6 +146,7 @@ export const DataProvider = ({ children }) => {
     completedBooks,
     completedMovies,
     completedSeries,
+    userAuthenticationId
   ]);
 
   return (
@@ -174,6 +179,8 @@ export const DataProvider = ({ children }) => {
         CompletedPendingData,
         error,
         setError,
+        userAuthenticationId,
+        setUserAuthenticationId,
       }}
     >
       {children}
