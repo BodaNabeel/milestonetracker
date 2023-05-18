@@ -15,44 +15,50 @@ import {
 } from "@mui/material";
 import notFoundImg from "../image/not-found.svg";
 function DataRender({ data, parameter, list, setList, setData }) {
-  const {clickedButtonsList, setClickedButtonsList} =useContext(DataContext)
+  const { clickedButtonsList, setClickedButtonsList } = useContext(DataContext);
   const vwOne = useMediaQuery("(max-width:425px)");
   const vwTwo = useMediaQuery("(max-width: 290px)");
   const toggleCompletedList = (id, data) => {
     const disposalList = [...list];
-    console.log(disposalList);
+    // console.log(disposalList);
     disposalList.push(data[id].id);
     setList(disposalList);
 
     if (list.includes(data[id].id)) {
       const index = list.indexOf(data[id].id);
       const disposalList = [...list];
-      console.log(disposalList);
       disposalList.splice(index, 1);
       setList(disposalList);
     }
   };
   const deleteAnItem = (id, data) => {
     let arr = [];
-    console.log(data[id].id);
-    const clickedItem = data[id].id;
-    data.map((el) => {
-      arr.push(el.id);
+    data.map((element) => {
+      arr.push(element.id);
     });
-    const disposalList = [...arr];
 
-    disposalList.splice(clickedItem, 1);
+    // removing item from the completed item list
+    const clickedItemId = data[id].id;
+    const completedList = [...list];
+    const clickedItemIdFromCompletedList = completedList.indexOf(clickedItemId);
+    clickedItemIdFromCompletedList !== -1
+      ? completedList.splice(clickedItemIdFromCompletedList, 1)
+      : null;
+    setList(completedList);
 
-    const disposalData = [...data];
+    // removing item from data
+    data.splice(id, 1);
+    setData(data);
 
-    disposalData.splice(id, 1);
-
-    const disposalClickedButtonsList = [...clickedButtonsList]
-    disposalClickedButtonsList.splice(clickedItem,1)
-    // console.log(clickedButtonsList)
-    // console.log(disposalClickedButtonsList)
-    setData(disposalData);
-    setClickedButtonsList(disposalClickedButtonsList)
+    // remove item from clickedButtonList
+    const disposalClickedButtonList = [...clickedButtonsList]
+    console.log(disposalClickedButtonList)
+    const clickedItemFromClickedButtonList =
+      disposalClickedButtonList.indexOf(clickedItemId);
+      clickedItemFromClickedButtonList !== -1 ? disposalClickedButtonList.splice(clickedItemFromClickedButtonList,1) : null
+    
+    
+    setClickedButtonsList(disposalClickedButtonList)
   };
   if (data.length === 0) {
     return (
