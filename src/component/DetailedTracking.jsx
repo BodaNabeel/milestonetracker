@@ -20,7 +20,6 @@ function DataRender({ data, parameter, list, setList, setData }) {
   const vwTwo = useMediaQuery("(max-width: 290px)");
   const toggleCompletedList = (id, data) => {
     const disposalList = [...list];
-    // console.log(disposalList);
     disposalList.push(data[id].id);
     setList(disposalList);
 
@@ -52,7 +51,6 @@ function DataRender({ data, parameter, list, setList, setData }) {
 
     // remove item from clickedButtonList
     const disposalClickedButtonList = [...clickedButtonsList]
-    console.log(disposalClickedButtonList)
     const clickedItemFromClickedButtonList =
       disposalClickedButtonList.indexOf(clickedItemId);
       clickedItemFromClickedButtonList !== -1 ? disposalClickedButtonList.splice(clickedItemFromClickedButtonList,1) : null
