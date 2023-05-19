@@ -65,8 +65,12 @@ export default function LogInFunction() {
     <button
       style={{
         border: "none",
-        background: "transparent",
-        cursor: "pointer"
+        background: "white",
+        cursor: "pointer",
+        padding: "18px",
+        borderRadius: "12px",
+        fontWeight: "600",
+        fontSize: "15px"
       }}
       onClick={handleSignIn}
     >
