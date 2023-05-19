@@ -13,11 +13,17 @@ export default function Homepage() {
         width: "100vw",
         background: "black",
       }}
-      className="main-txt"
+      className="main-area"
     >
-      <h1 className="main-text">
-        easy way to <span className="highlight">track</span> all your books
-      </h1>
+      <div class="wrapper">
+        <p> a single place to track all your </p>
+        <div class="words">
+          <span> </span>
+          <span> books</span>
+          <span> series</span>
+          <span> movies</span>
+        </div>
+      </div>
 
       <LogInFunction />
     </div>

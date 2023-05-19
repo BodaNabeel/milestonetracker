@@ -1,16 +1,20 @@
+@import "@fontsource/poppins";
+*,
+*:before,
+*:after {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
   overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+
 }
-/* html, body, #root, #app>div {
-  height: 1% !important;
-} */
-/* #root {
-  height: 100vh !important;
-  overflow-x: hidden;
-} */
+
 
 .text-truncate {
   overflow: hidden;
@@ -53,7 +57,8 @@ body {
   font-size: 80px;
   margin-left: 40px;
   color: white;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 200;
 }
 .highlight {
@@ -63,10 +68,47 @@ body {
   background-position: 0 90%;
 }
 
-@media screen and (max-width: 700px){
+.wrapper {
+  box-sizing: content-box;
+
+  height: 70px;
+  padding: 50px 30px;
+  display: flex;
+  border-radius: 8px;
+  color: white;
+  font-size: 45px;
+  font-weight: 600;
+
+}
+span {
+  display: block;
+  
+  height: 100%;
+  padding-left: 10px;
+  animation: spin_words 2.5s infinite forwards;
+  color: #92a2d0;
+
+
+}
+.words {
+  overflow: hidden;
+}
+
+@keyframes spin_words {
+  33% {
+    transform: translateY(-100%);
+  }
+  67% {
+    transform: translateY(-200%);
+  }
+
+  100% {
+    transform: translateY(-300%);
+  }
+}
+
+@media screen and (max-width: 700px) {
   .main-text {
     font-size: 45px;
   }
 }
-
-

@@ -8,7 +8,6 @@ import ProgressOverviewCard from "./component/card/ProgressOverviewCard";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import DetailedTracking from "./component/DetailedTracking";
 import Homepage from "./component/Homepage";
-
 function PrimaryApp() {
   const responsiveSearchBar = useMediaQuery("(max-width:700px)");
   const [searchFieldQuery, setSearchFieldQuery] = React.useState("");
