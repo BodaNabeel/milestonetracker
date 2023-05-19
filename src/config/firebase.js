@@ -114,8 +114,6 @@ const readUserContent = (
       setLoaded(true);
     });
   }
-  // const userID = localStorage.getItem("userIdentification");
-  console.log("mounted");
 };
 
 export {
