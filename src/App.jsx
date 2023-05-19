@@ -35,17 +35,9 @@ function PrimaryApp() {
 }
 
 function App() {
-  const [hasUserLoggedin, setHasUserLoggedin] = useState(false);
   const { userAuthenticationId } = useContext(DataContext);
-  useEffect(() => {
-    async function init() {
-      const data = await localStorage.getItem("userIdentification");
-      console.log(data);
-    }
-    init();
-  }, [userAuthenticationId]);
+  console.log(`i'm looking for remote internship as a ReactJS dev, if you're hiring for the role kindly DM me on https://twitter.com/BodaNabeel :)`)
 
-  console.log(hasUserLoggedin, userAuthenticationId);
   return (
     <BrowserRouter>
       {userAuthenticationId ? (
