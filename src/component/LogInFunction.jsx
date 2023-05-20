@@ -63,15 +63,8 @@ export default function LogInFunction() {
 
   return (
     <button
-      style={{
-        border: "none",
-        background: "white",
-        cursor: "pointer",
-        padding: "18px",
-        borderRadius: "12px",
-        fontWeight: "600",
-        fontSize: "15px"
-      }}
+    className="signin-btn"
+      
       onClick={handleSignIn}
     >
       sign in now...!
