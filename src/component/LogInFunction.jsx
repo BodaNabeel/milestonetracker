@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import { getDatabase, ref as sRef, update } from "firebase/database";
 import { DataContext } from "../data/DataContext";
-
+import { ClipLoader } from "react-spinners";
 export default function LogInFunction() {
   const { userAuthenticationId, setUserAuthenticationId } =
     useContext(DataContext);
@@ -41,15 +41,32 @@ export default function LogInFunction() {
       console.log("logged out");
       setUserAuthenticationId(null);
       localStorage.removeItem("userIdentification");
+      localStorage.removeItem("sign_in_clicked");
     }
   });
   const handleSignIn = () => {
     signInWithRedirect(auth, provider);
+    localStorage.setItem("sign_in_clicked", true);
   };
 
-  return (
-    <button className="signin-btn" onClick={handleSignIn}>
-      sign in now...!
-    </button>
-  );
+  if (localStorage.getItem("sign_in_clicked")) {
+    return (
+      <button className="signin-btn-clicked">
+        loading <ClipLoader color="white" size={10} />
+      </button>
+    );
+  } else {
+    return (
+      <button className="signin-btn" onClick={handleSignIn}>
+        sign in now...!
+      </button>
+    );
+  }
+  // return (
+  //   {localStorage.getItem("sign_in_clicked") ? <button></button> : <button> </button>}
+  // <button className="signin-btn" onClick={handleSignIn}>
+  //    sign in now...!
+
+  // </button>
+  // );
 }

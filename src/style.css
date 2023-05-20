@@ -91,12 +91,25 @@ body {
 }
 .signin-btn {
   border: none;
-  background: white;
+
   cursor: pointer;
   padding: 18px;
   border-radius: 12px;
   font-weight: 600;
   font-size: 16px;
+  background-color: white;
+}
+.signin-btn-clicked{
+  border: none;
+
+  cursor: pointer;
+  padding: 18px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  background-color: grey;
+  color: white;
+  /* width: ; */
 }
 
 @media screen and (max-width: 800px) {
@@ -109,7 +122,7 @@ body {
   }
   .signin-btn {
     font-size: 14px;
-    padding: 9px;
+    padding: px;
   }
   .words {
     margin-top: -20px;
