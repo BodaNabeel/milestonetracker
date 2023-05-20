@@ -29,47 +29,20 @@ export default function LogInFunction() {
     });
   };
 
-  // useEffect(() => {
-  //   const handleRedirectResult = () => {
-  // getRedirectResult(auth)
-  //   .then((result) => {
-  //     const user = result?.user;
-  //     const localstorageUserId = localStorage.getItem("userIdentification");
-  //     setUserSigned(true);
-  //     if (user && user.uid !== localstorageUserId) {
-  //       localStorage.setItem("userIdentification", user.uid);
-  //       setUserAuthenticationId(
-  //         localStorage.getItem("userIdentification") || null
-  //       );
-  //       writeUserData(user.displayName, user.email, user.uid);
-  //     }
-  //   })
-  //   .catch((error) => {
-  //     // Handle any error that occurred during redirect result retrieval
-  //     console.error(error);
-  //   });
-  // };
-
-  //   handleRedirectResult();
-  // }, [userSigned]);
-
-  getRedirectResult(auth)
-    .then((result) => {
-      const user = result?.user;
-      const localstorageUserId = localStorage.getItem("userIdentification");
-      setUserSigned(true);
-      if (user && user.uid !== localstorageUserId) {
-        localStorage.setItem("userIdentification", user.uid);
-        setUserAuthenticationId(
-          localStorage.getItem("userIdentification") || null
-        );
-        writeUserData(user.displayName, user.email, user.uid);
-      }
-    })
-    .catch((error) => {
-      // Handle any error that occurred during redirect result retrieval
-      console.error(error);
-    });
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      console.log(user);
+      localStorage.setItem("userIdentification", user.uid);
+      setUserAuthenticationId(
+        localStorage.getItem("userIdentification") || null
+      );
+      writeUserData(user.displayName, user.email, user.uid);
+    } else {
+      console.log("logged out");
+      setUserAuthenticationId(null);
+      localStorage.removeItem("userIdentification");
+    }
+  });
   const handleSignIn = () => {
     signInWithRedirect(auth, provider);
   };
