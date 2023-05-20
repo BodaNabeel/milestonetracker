@@ -35,11 +35,10 @@ function PrimaryApp() {
 
 function App() {
   const { userAuthenticationId } = useContext(DataContext);
-  console.log(`i'm looking for remote internship as a ReactJS dev, if you're hiring for the role kindly DM me on https://twitter.com/BodaNabeel :)`)
 
   return (
     <BrowserRouter>
-      {userAuthenticationId ? (
+      {userAuthenticationId !== null? (
         <>
           <PrimaryApp />
           <Routes>
