@@ -6,6 +6,7 @@ import {
   getRedirectResult,
   onAuthStateChanged,
   setPersistence,
+  signInWithPopup,
   signInWithRedirect,
 } from "firebase/auth";
 import { getDatabase, ref as sRef, update } from "firebase/database";
@@ -38,14 +39,14 @@ export default function LogInFunction() {
       );
       writeUserData(user.displayName, user.email, user.uid);
     } else {
-      console.log("logged out");
+      
       setUserAuthenticationId(null);
       localStorage.removeItem("userIdentification");
       localStorage.removeItem("sign_in_clicked");
     }
   });
   const handleSignIn = () => {
-    signInWithRedirect(auth, provider);
+    signInWithPopup(auth, provider);
     localStorage.setItem("sign_in_clicked", true);
   };
 
