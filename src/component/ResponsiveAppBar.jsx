@@ -9,7 +9,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchBar from "./SearchBar";
 import { Divider, useMediaQuery } from "@mui/material";
 import {useNavigate} from "react-router-dom"
-import handleSignOut from "./LogOutFunction";
 import LogoutFunction from "./LogoutFunction";
 
 export default function ResponsiveAppBar({
