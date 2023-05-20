@@ -18,10 +18,10 @@ export default function Homepage() {
       <div className="wrapper">
         <p> a single place to track all your </p>
         <div className="words">
-          <span> </span>
-          <span> books</span>
-          <span> series</span>
-          <span> movies</span>
+          <span className="words_text"> </span>
+          <span className="words_text"> books</span>
+          <span className="words_text"> series</span>
+          <span className="words_text"> movies</span>
         </div>
       </div>
 
