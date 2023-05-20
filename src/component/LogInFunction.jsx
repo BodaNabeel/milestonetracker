@@ -4,6 +4,7 @@ import {
   browserLocalPersistence,
   getAuth,
   getRedirectResult,
+  onAuthStateChanged,
   setPersistence,
   signInWithRedirect,
 } from "firebase/auth";
@@ -16,6 +17,7 @@ export default function LogInFunction() {
   const [userSigned, setUserSigned] = useState(false);
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
+  const user = auth.currentUser;
   const db = getDatabase();
   setPersistence(auth, browserLocalPersistence);
 
@@ -27,38 +29,49 @@ export default function LogInFunction() {
     });
   };
 
-  useEffect(() => {
-    const handleRedirectResult = () => {
-      getRedirectResult(auth)
-        .then((result) => {
-          const user = result?.user;
-          const localstorageUserId = localStorage.getItem("userIdentification");
-          setUserSigned(true);
-          if (user && user.uid !== localstorageUserId) {
-            localStorage.setItem("userIdentification", user.uid);
-            setUserAuthenticationId(
-              localStorage.getItem("userIdentification") || null
-            );
-            writeUserData(user.displayName, user.email, user.uid);
-          }
-        })
-        .catch((error) => {
-          // Handle any error that occurred during redirect result retrieval
-          console.error(error);
-        });
-    };
+  // useEffect(() => {
+  //   const handleRedirectResult = () => {
+  // getRedirectResult(auth)
+  //   .then((result) => {
+  //     const user = result?.user;
+  //     const localstorageUserId = localStorage.getItem("userIdentification");
+  //     setUserSigned(true);
+  //     if (user && user.uid !== localstorageUserId) {
+  //       localStorage.setItem("userIdentification", user.uid);
+  //       setUserAuthenticationId(
+  //         localStorage.getItem("userIdentification") || null
+  //       );
+  //       writeUserData(user.displayName, user.email, user.uid);
+  //     }
+  //   })
+  //   .catch((error) => {
+  //     // Handle any error that occurred during redirect result retrieval
+  //     console.error(error);
+  //   });
+  // };
 
-    handleRedirectResult();
-  }, [userAuthenticationId]);
+  //   handleRedirectResult();
+  // }, [userSigned]);
 
+  getRedirectResult(auth)
+    .then((result) => {
+      const user = result?.user;
+      const localstorageUserId = localStorage.getItem("userIdentification");
+      setUserSigned(true);
+      if (user && user.uid !== localstorageUserId) {
+        localStorage.setItem("userIdentification", user.uid);
+        setUserAuthenticationId(
+          localStorage.getItem("userIdentification") || null
+        );
+        writeUserData(user.displayName, user.email, user.uid);
+      }
+    })
+    .catch((error) => {
+      // Handle any error that occurred during redirect result retrieval
+      console.error(error);
+    });
   const handleSignIn = () => {
     signInWithRedirect(auth, provider);
-  };
-
-  const handleSignOut = () => {
-    auth.signOut();
-    localStorage.removeItem("userIdentification");
-    setUserSigned(false);
   };
 
   return (
