@@ -13,7 +13,7 @@ export default function Homepage() {
         width: "100vw",
         background: "black",
       }}
-      className="main-area"
+      className="homepage"
     >
       <div class="wrapper">
         <p> a single place to track all your </p>
