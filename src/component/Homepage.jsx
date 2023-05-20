@@ -15,9 +15,9 @@ export default function Homepage() {
       }}
       className="homepage"
     >
-      <div class="wrapper">
+      <div className="wrapper">
         <p> a single place to track all your </p>
-        <div class="words">
+        <div className="words">
           <span> </span>
           <span> books</span>
           <span> series</span>

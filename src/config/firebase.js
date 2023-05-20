@@ -11,9 +11,9 @@ import {
   getAuth,
   setPersistence,
 } from "firebase/auth";
-
+const firebase_key = import.meta.env.VITE_FIREBASE_API_KEY
 const firebaseConfig = {
-  apiKey: "AIzaSyCni-Lamze6a0TQ-myN-xbVALXpU5lzJxQ",
+  apiKey: firebase_key,
   authDomain: "tracklist-demo.firebaseapp.com",
   databaseURL: "https://tracklist-demo-default-rtdb.firebaseio.com",
   projectId: "tracklist-demo",

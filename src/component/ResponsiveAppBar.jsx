@@ -37,7 +37,9 @@ export default function ResponsiveAppBar({
             justifyContent: "space-between",
           }}
         >
-          <p onClick={() => navigate("/")}>Home</p>
+          <p style={{
+            marginRight: "50px"
+          }} onClick={() => navigate("/")}>Home</p>
           <Divider orientation="vertical" flexItem />
           {responsiveSearchBar ? (
             <SearchBar
