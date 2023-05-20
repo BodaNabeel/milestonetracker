@@ -49,7 +49,7 @@ export default function LogInFunction() {
     };
 
     handleRedirectResult();
-  }, [userSigned]);
+  }, [userAuthenticationId]);
 
   const handleSignIn = () => {
     signInWithRedirect(auth, provider);
@@ -62,11 +62,7 @@ export default function LogInFunction() {
   };
 
   return (
-    <button
-    className="signin-btn"
-      
-      onClick={handleSignIn}
-    >
+    <button className="signin-btn" onClick={handleSignIn}>
       sign in now...!
     </button>
   );
