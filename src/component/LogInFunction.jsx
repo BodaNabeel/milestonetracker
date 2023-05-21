@@ -32,7 +32,7 @@ export default function LogInFunction() {
 
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      console.log(user);
+     
       localStorage.setItem("userIdentification", user.uid);
       setUserAuthenticationId(
         localStorage.getItem("userIdentification") || null
