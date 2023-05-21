@@ -7,6 +7,10 @@ function LogoutFunction() {
   const handleSignOut = () => {
     const auth = getAuth();
     auth.signOut();
+    console.log("mounted")
+    localStorage.removeItem("userIdentification");
+    localStorage.removeItem("sign_in_clicked");
+    setUserAuthenticationId(null);
   };
 
   return (
