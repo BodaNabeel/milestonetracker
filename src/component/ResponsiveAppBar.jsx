@@ -37,7 +37,8 @@ export default function ResponsiveAppBar({
           }}
         >
           <p style={{
-            marginRight: "50px"
+            marginRight: "50px",
+            cursor: "pointer"
           }} onClick={() => navigate("/")}>Home</p>
           <Divider orientation="vertical" flexItem />
           {responsiveSearchBar ? (
