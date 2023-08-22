@@ -80,7 +80,7 @@ export default function ProgressOverviewCard() {
             </div>
             <button
               onClick={() =>
-                navigate(`/tracking/${CompletedPendingData[el].title}`)
+                navigate(`/tracking/${CompletedPendingData[el].title.toLowerCase()}`)
               }
               className="ProgressOverviewCard-btn"
               style={{
